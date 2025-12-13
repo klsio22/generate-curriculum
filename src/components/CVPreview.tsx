@@ -10,8 +10,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
     // ABNT Styling constants
     const sectionTitleClass =
       'uppercase font-bold text-sm mb-2 border-b border-black pb-1 mt-6';
-    const textClass = 'text-justify leading-[1.5] text-base mb-1'; // 1.5 line height, base size (~12pt usually implies 16px in web, but strict 12pt is 16px)
-    // Tailwind text-base is 1rem = 16px. 12pt is 16px. So text-base is correct.
+    const textClass = 'text-justify leading-[1.5] text-base mb-1';
 
     return (
       <div

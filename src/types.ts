@@ -26,3 +26,9 @@ export interface CVData {
   experience: Experience[];
   skills: string;
 }
+
+export interface SavedCV extends CVData {
+  id: string;
+  title: string;
+  updatedAt: number;
+}
