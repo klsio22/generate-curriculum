@@ -41,32 +41,12 @@ function App() {
 
   const data = useWatch({ control }) as CVData;
 
-  useEffect(() => {
+  // Save only on explicit UI events (blur / keyup) triggered from the form.
+  const handleSave = () => {
     if (skipSaveRef.current) return;
     if (!activeId || !data) return;
-
-    let activeData: CVData | null = null;
-    if (activeCV) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { id, title, updatedAt, ...rest } = activeCV;
-      activeData = rest as CVData;
-    }
-
-    const dataStr = JSON.stringify(data || {});
-    const activeStr = JSON.stringify(activeData || {});
-
-    if (dataStr === activeStr) return;
-
-    // Debounce updates so we don't dispatch on every keystroke
-    const timer = setTimeout(() => {
-      updateCV(activeId, data);
-    }, 600);
-
-    return () => clearTimeout(timer);
-    // activeCV is read inside but should not be a dependency to avoid infinite loops
-    // since it's recreated on every render from cvs.find()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, activeId, updateCV]);
+    updateCV(activeId, data);
+  };
 
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
@@ -143,6 +123,7 @@ function App() {
                   onSubmit={() => {}}
                   register={register}
                   control={control}
+                  onSave={handleSave}
                 />
               </div>
             </div>

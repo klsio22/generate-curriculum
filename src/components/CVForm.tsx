@@ -12,6 +12,7 @@ interface CVFormProps {
   onSubmit: (data: CVData) => void;
   register: UseFormRegister<CVData>;
   control: Control<CVData>;
+  onSave?: () => void;
 }
 
 // Helper for section header
@@ -21,7 +22,13 @@ const SectionHeader = ({ title }: { title: string }) => (
   </h3>
 );
 
-export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
+export const CVForm: React.FC<CVFormProps> = ({ register, control, onSave }) => {
+  const callSave = () => {
+    if (onSave) onSave();
+  };
+  // register has a complex Path type; suppress explicit-any lint for this local adapter
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const reg = (name: string) => ({ ...register(name as any), onBlur: callSave, onKeyUp: callSave });
   const {
     fields: eduFields,
     append: appendEdu,
@@ -58,7 +65,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
             Nome Completo
           </label>
           <input
-            {...register('fullName')}
+            {...reg('fullName')}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           />
         </div>
@@ -67,7 +74,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
             Cargo / Posição
           </label>
           <input
-            {...register('jobTitle')}
+            {...reg('jobTitle')}
             placeholder="Ex: Desenvolvedor de Software"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           />
@@ -77,7 +84,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
             Email
           </label>
           <input
-            {...register('email')}
+            {...reg('email')}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           />
         </div>
@@ -86,7 +93,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
             Telefone
           </label>
           <input
-            {...register('phone')}
+            {...reg('phone')}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           />
         </div>
@@ -95,7 +102,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
             Endereço
           </label>
           <input
-            {...register('address')}
+            {...reg('address')}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           />
         </div>
@@ -104,7 +111,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
             LinkedIn
           </label>
           <input
-            {...register('linkedin')}
+            {...reg('linkedin')}
             placeholder="Ex: linkedin.com/in/seu-perfil"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           />
@@ -114,7 +121,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
             Portfólio
           </label>
           <input
-            {...register('portfolio')}
+            {...reg('portfolio')}
             placeholder="Ex: www.seusite.com.br"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           />
@@ -124,7 +131,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
       <SectionHeader title="Objetivo Profissional" />
       <div>
         <textarea
-          {...register('objective')}
+          {...reg('objective')}
           rows={3}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Descreva seu objetivo profissional..."
@@ -150,7 +157,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Curso
               </label>
               <input
-                {...register(`education.${index}.course`)}
+                {...reg(`education.${index}.course`)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
@@ -159,7 +166,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Instituição
               </label>
               <input
-                {...register(`education.${index}.institution`)}
+                {...reg(`education.${index}.institution`)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
@@ -168,7 +175,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Início
               </label>
               <input
-                {...register(`education.${index}.startDate`)}
+                {...reg(`education.${index}.startDate`)}
                 placeholder="Ex: 2018"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
@@ -178,7 +185,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Término
               </label>
               <input
-                {...register(`education.${index}.endDate`)}
+                {...reg(`education.${index}.endDate`)}
                 placeholder="Ex: 2022"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
@@ -221,7 +228,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Cargo
               </label>
               <input
-                {...register(`experience.${index}.role`)}
+                {...reg(`experience.${index}.role`)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
@@ -230,7 +237,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Empresa
               </label>
               <input
-                {...register(`experience.${index}.company`)}
+                {...reg(`experience.${index}.company`)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
@@ -239,7 +246,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Início
               </label>
               <input
-                {...register(`experience.${index}.startDate`)}
+                {...reg(`experience.${index}.startDate`)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
@@ -248,7 +255,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Término
               </label>
               <input
-                {...register(`experience.${index}.endDate`)}
+                {...reg(`experience.${index}.endDate`)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
@@ -257,7 +264,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Descrição das Atividades
               </label>
               <textarea
-                {...register(`experience.${index}.description`)}
+                {...reg(`experience.${index}.description`)}
                 rows={3}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
@@ -285,7 +292,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
       <SectionHeader title="Habilidades e Qualificações" />
       <div>
         <textarea
-          {...register('skills')}
+          {...reg('skills')}
           rows={4}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Liste suas principais habilidades (uma por linha)..."
@@ -311,7 +318,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Nome
               </label>
               <input
-                {...register(`references.${index}.name`)}
+                {...reg(`references.${index}.name`)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
@@ -320,7 +327,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 E-mail
               </label>
               <input
-                {...register(`references.${index}.email`)}
+                {...reg(`references.${index}.email`)}
                 type="email"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
@@ -330,7 +337,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control }) => {
                 Telefone
               </label>
               <input
-                {...register(`references.${index}.phone`)}
+                {...reg(`references.${index}.phone`)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>

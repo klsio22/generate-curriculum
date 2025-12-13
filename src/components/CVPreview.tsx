@@ -9,7 +9,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
   ({ data }: CVPreviewProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     // Styling constants - cor azul da imagem: #4657F1
     const primaryColor = '#4657F1';
-    const sectionTitleClass = 'uppercase font-bold text-sm mb-3';
+    const sectionTitleClass = 'uppercase font-bold text-[12px] mb-3';
     const textClass = 'text-sm leading-relaxed mb-2';
 
     return (
@@ -20,8 +20,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
       >
         {/* Header - Nome e Cargo */}
         <div className="mb-6">
-          <div className="flex justify-between w-full">
-            <div className="flex flex-col w-full">
+          <div className="flex justify-between ">
+              <div className="flex flex-col w-1/2">
               <h1
                 className="font-bold text-4xl mb-2"
                 style={{ color: primaryColor }}
@@ -32,8 +32,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                 {data.jobTitle || 'Profissional'}
               </p>
             </div>
-            {/* Coluna Direita - 35% */}
-            <div className="w-[400px]">
+            <div className="w-50">
               {/* CONTATO */}
               <div className="mb-6">
                 <h2
@@ -75,7 +74,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
           {/* Layout de duas colunas: 65% esquerda, 35% direita */}
           <div className="flex flex-col">
             {/* Coluna Esquerda - 65% */}
-            <div className="flex-[65]">
+            <div className="">
               {/* PERFIL */}
               {data.objective && (
                 <div className="mb-6">
@@ -100,8 +99,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                   </h2>
                   {data.experience.map((exp, idx) => (
                     <div key={idx} className="mb-5">
-                      <p className="font-bold text-base mb-1">{exp.role}</p>
-                      <p className="text-sm mb-2">
+                      <p className="font-bold text-[11px] mb-1">{exp.role}</p>
+                      <p className="text-[11px] mb-2">
                         {exp.company} | {exp.startDate} - {exp.endDate}
                       </p>
                       {exp.description && (
@@ -131,7 +130,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
               )}
             </div>
 
-            <div className="flex">
+            <div className="flex justify-between">
               {/* FORMAÇÃO ACADÊMICA */}
               {data.education && data.education.length > 0 && (
                 <div className="mb-6">
@@ -143,9 +142,9 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                   </h2>
                   {data.education.map((edu, idx) => (
                     <div key={idx} className="mb-4">
-                      <p className="font-bold text-sm">{edu.institution}</p>
-                      <p className="text-sm">{edu.course}</p>
-                      <p className="text-sm text-gray-600">
+                      <p className="font-bold text-[11px]">{edu.institution}</p>
+                      <p className="text-[11px]">{edu.course}</p>
+                      <p className="text-[11px] text-gray-600">
                         {edu.startDate} - {edu.endDate}
                       </p>
                     </div>
@@ -153,7 +152,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                 </div>
               )}
 
-              <div className='block'>
+              <div className='block w-62.5'>
                 {/* HABILIDADES */}
                 {data.skills && (
                   <div className="mb-6">
