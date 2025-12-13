@@ -8,6 +8,7 @@ import { CVForm } from './components/CVForm';
 import { CVPreview } from './components/CVPreview';
 import { useCVStorage } from './hooks/useCVStorage';
 import { Sidebar } from './components/Sidebar';
+import { Modal } from './components/Modal';
 
 function App() {
   const {
@@ -23,6 +24,9 @@ function App() {
   } = useCVStorage();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showClearModal, setShowClearModal] = useState(false);
 
   const initialValues = activeCV ?? emptyCV;
   const { register, control, reset } = useForm<CVData>({
@@ -49,6 +53,25 @@ function App() {
     updateCV(activeId, data);
   };
 
+  // Sidebar requests
+  const handleRequestDelete = (id: string) => {
+    setPendingDeleteId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (pendingDeleteId) deleteCV(pendingDeleteId);
+    setPendingDeleteId(null);
+    setShowDeleteModal(false);
+  };
+
+  const handleRequestClear = () => setShowClearModal(true);
+
+  const handleConfirmClear = () => {
+    clearAll();
+    setShowClearModal(false);
+  };
+
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
 
@@ -73,9 +96,36 @@ function App() {
           if (window.innerWidth < 1024) setIsSidebarOpen(false);
         }}
         clearAll={clearAll}
+        onRequestDelete={handleRequestDelete}
+        onRequestClear={handleRequestClear}
         isOpen={isSidebarOpen}
         toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
       />
+
+      {/* Modals rendered at App level so they are outside sidebar stacking context */}
+      <div>
+        <Modal
+          isOpen={showDeleteModal}
+          title="Confirmar exclusão"
+          onCancel={() => setShowDeleteModal(false)}
+          onConfirm={handleConfirmDelete}
+          confirmLabel="Excluir"
+          cancelLabel="Cancelar"
+        >
+          <p>Tem certeza que deseja excluir este currículo?</p>
+        </Modal>
+
+        <Modal
+          isOpen={showClearModal}
+          title="Limpar dados"
+          onCancel={() => setShowClearModal(false)}
+          onConfirm={handleConfirmClear}
+          confirmLabel="Limpar"
+          cancelLabel="Cancelar"
+        >
+          <p>Limpar todos os currículos e restaurar valores padrão?</p>
+        </Modal>
+      </div>
 
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         <header className="bg-white shadow p-4 sticky top-0 z-10">
