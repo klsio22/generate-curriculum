@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   useFieldArray,
   type Control,
@@ -10,11 +10,6 @@ import { Plus, Trash2 } from 'lucide-react';
 interface CVFormProps {
   defaultValues: CVData;
   onSubmit: (data: CVData) => void;
-  // We can pass the hook form methods if we want to control from parent,
-  // but better to keep form logic here or bubble it up.
-  // For Real-time preview, we might want to watch the form values in the parent.
-  // So let's accept `register` and `control` from parent or simply `onChange`.
-  // Actually simplest is: Parent has useForm, passes `register`, `control` etc.
   register: UseFormRegister<CVData>;
   control: Control<CVData>;
 }
