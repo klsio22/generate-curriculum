@@ -8,6 +8,7 @@ interface SidebarProps {
   onSelect: (id: string) => void;
   onCreate: () => void;
   onDelete: (id: string) => void;
+  clearAll: () => void;
   isOpen: boolean;
   toggleSidebar: () => void;
 }
@@ -18,6 +19,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSelect,
   onCreate,
   onDelete,
+  clearAll,
   isOpen,
   toggleSidebar,
 }) => {
@@ -99,6 +101,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
           >
             <Plus size={20} />
             Novo Currículo
+          </button>
+
+          <button
+            onClick={() => {
+              if (
+                window.confirm('Limpar todos os currículos e restaurar valores padrão?')
+              ) {
+                clearAll();
+              }
+            }}
+            className="flex items-center justify-center gap-2 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors mb-4"
+          >
+            Limpar dados
           </button>
 
           <div className="flex-1 overflow-y-auto space-y-2">

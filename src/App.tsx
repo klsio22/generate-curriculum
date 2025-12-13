@@ -24,7 +24,7 @@ const emptyCV: CVData = {
 };
 
 function App() {
-  const { cvs, activeId, activeCV, setActiveId, createCV, updateCV, deleteCV } =
+  const { cvs, activeId, activeCV, setActiveId, createCV, updateCV, deleteCV, clearAll } =
     useCVStorage();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -77,7 +77,10 @@ function App() {
     if (dataStr === activeStr) return;
 
     updateCV(activeId, data);
-  }, [data, activeId, updateCV, activeCV]);
+    // activeCV is read inside but should not be a dependency to avoid infinite loops
+    // since it's recreated on every render from cvs.find()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, activeId, updateCV]);
 
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
@@ -100,6 +103,7 @@ function App() {
           if (window.innerWidth < 1024) setIsSidebarOpen(false);
         }}
         onDelete={deleteCV}
+        clearAll={clearAll}
         isOpen={isSidebarOpen}
         toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
       />
@@ -125,7 +129,7 @@ function App() {
           </div>
         </header>
 
-        <main className="flex-1 mx-auto w-full p-4 lg:p-8 max-w-7xl">
+        <main className="flex-1 mx-auto w-full p-4 lg:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             {/* Editor Column */}
             <div className="space-y-6">

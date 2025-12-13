@@ -33,7 +33,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
               </p>
             </div>
             {/* Coluna Direita - 35% */}
-            <div className="w-full">
+            <div className="w-[400px]">
               {/* CONTATO */}
               <div className="mb-6">
                 <h2

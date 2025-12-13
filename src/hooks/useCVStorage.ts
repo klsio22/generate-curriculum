@@ -5,6 +5,7 @@ const STORAGE_KEY = 'cv-data';
 
 const defaultCV: CVData = {
   fullName: 'Seu Nome',
+  jobTitle: 'Seu Cargo',
   address: 'Seu Endereço',
   phone: '(00) 00000-0000',
   email: 'seu.email@exemplo.com',
@@ -31,15 +32,43 @@ type State = {
   initialized: boolean;
 };
 
+
+interface InitFromStorageAction {
+  type: 'INIT_FROM_STORAGE';
+}
+
+interface CreateAction {
+  type: 'CREATE';
+  payload: SavedCV;
+}
+
+interface DeleteAction {
+  type: 'DELETE';
+  payload: { idToDelete: string; newCVIfEmpty: SavedCV };
+}
+
+interface UpdateAction {
+  type: 'UPDATE';
+  payload: { id: string; data: Partial<SavedCV>; updatedAt: number };
+}
+
+interface SelectAction {
+  type: 'SELECT';
+  payload: string;
+}
+
+interface ResetAction {
+  type: 'RESET';
+  payload: SavedCV[];
+}
+
 type Action =
-  | { type: 'INIT_FROM_STORAGE' }
-  | { type: 'CREATE'; payload: SavedCV }
-  | { type: 'DELETE'; payload: { idToDelete: string; newCVIfEmpty: SavedCV } }
-  | {
-      type: 'UPDATE';
-      payload: { id: string; data: Partial<SavedCV>; updatedAt: number };
-    }
-  | { type: 'SELECT'; payload: string };
+  | InitFromStorageAction
+  | CreateAction
+  | DeleteAction
+  | UpdateAction
+  | SelectAction
+  | ResetAction;
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
@@ -87,6 +116,14 @@ function reducer(state: State, action: Action): State {
       return {
         ...state,
         activeId: action.payload,
+      };
+    }
+    case 'RESET': {
+      const newCvs = action.payload;
+      return {
+        ...state,
+        cvs: newCvs,
+        activeId: newCvs.length > 0 ? newCvs[0].id : null,
       };
     }
     default:
@@ -144,6 +181,16 @@ export function useCVStorage() {
     });
   }, []);
 
+  const clearAll = useCallback(() => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {
+      console.error('Failed to clear storage', e);
+    }
+    const newCV = generateNewCV(0);
+    dispatch({ type: 'RESET', payload: [newCV] });
+  }, []);
+
   const updateCV = useCallback((id: string, data: Partial<SavedCV>) => {
     dispatch({
       type: 'UPDATE',
@@ -165,5 +212,6 @@ export function useCVStorage() {
     createCV,
     updateCV,
     deleteCV,
+    clearAll,
   };
 }
