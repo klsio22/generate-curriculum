@@ -19,6 +19,7 @@ function App() {
     updateCV,
     deleteCV,
     clearAll,
+    duplicateCV,
   } = useCVStorage();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -67,6 +68,10 @@ function App() {
           if (window.innerWidth < 1024) setIsSidebarOpen(false);
         }}
         onDelete={deleteCV}
+        onDuplicate={(id: string) => {
+          duplicateCV(id);
+          if (window.innerWidth < 1024) setIsSidebarOpen(false);
+        }}
         clearAll={clearAll}
         isOpen={isSidebarOpen}
         toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}

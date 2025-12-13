@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Plus, Trash2, FileText } from 'lucide-react';
+import { Plus, Trash2, FileText, Copy } from 'lucide-react';
 import type { SavedCV } from '../types';
 
 interface SidebarProps {
@@ -8,6 +8,7 @@ interface SidebarProps {
   onSelect: (id: string) => void;
   onCreate: () => void;
   onDelete: (id: string) => void;
+  onDuplicate: (id: string) => void;
   clearAll: () => void;
   isOpen: boolean;
   toggleSidebar: () => void;
@@ -19,14 +20,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSelect,
   onCreate,
   onDelete,
+  onDuplicate,
   clearAll,
   isOpen,
   toggleSidebar,
 }) => {
   const dialogRef = React.useRef<HTMLDialogElement | null>(null);
+  const asideRef = React.useRef<HTMLElement | null>(null);
   const [pendingDeleteId, setPendingDeleteId] = React.useState<string | null>(
     null
   );
+
+  React.useEffect(() => {
+    function handleOutsideClick(e: MouseEvent) {
+      if (!isOpen) return;
+      const target = e.target as Node | null;
+      if (asideRef.current && target && !asideRef.current.contains(target)) {
+        toggleSidebar();
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [isOpen, toggleSidebar]);
 
   const openConfirm = (id: string) => {
     setPendingDeleteId(id);
@@ -68,6 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       )}
 
       <aside
+        ref={asideRef}
         className={`fixed inset-y-0 left-0 bg-gray-900 text-white w-64 transform transition-transform duration-200 ease-in-out z-30 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
@@ -143,16 +160,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     </span>
                   </div>
                 </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openConfirm(cv.id);
-                  }}
-                  className="text-gray-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1"
-                  title="Excluir"
-                >
-                  <Trash2 size={16} />
-                </button>
+                <div className="flex items-center">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDuplicate(cv.id);
+                    }}
+                    className="text-gray-500 hover:text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity p-1 mr-2"
+                    title="Duplicar"
+                  >
+                    <Copy size={16} />
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openConfirm(cv.id);
+                    }}
+                    className="text-gray-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1"
+                    title="Excluir"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>

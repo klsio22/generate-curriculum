@@ -3,6 +3,7 @@ import {
   useFieldArray,
   type Control,
   type UseFormRegister,
+  type Path,
 } from 'react-hook-form';
 import type { CVData } from '../types';
 import { Plus, Trash2 } from 'lucide-react';
@@ -26,9 +27,8 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control, onSave }) => 
   const callSave = () => {
     if (onSave) onSave();
   };
-  // register has a complex Path type; suppress explicit-any lint for this local adapter
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const reg = (name: string) => ({ ...register(name as any), onBlur: callSave, onKeyUp: callSave });
+
+  const reg = (name: Path<CVData>) => ({ ...register(name), onBlur: callSave });
   const {
     fields: eduFields,
     append: appendEdu,

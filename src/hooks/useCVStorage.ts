@@ -162,6 +162,18 @@ export function useCVStorage() {
     dispatch({ type: 'CREATE', payload: newCV });
   }, [state.cvs.length]);
 
+  const duplicateCV = useCallback((id: string) => {
+    const original = state.cvs.find((cv) => cv.id === id);
+    if (!original) return;
+    const newCV: SavedCV = {
+      ...original,
+      id: crypto.randomUUID(),
+      title: `${original.title} (cópia)`,
+      updatedAt: Date.now(),
+    };
+    dispatch({ type: 'CREATE', payload: newCV });
+  }, [state.cvs]);
+
   const deleteCV = useCallback((id: string) => {
     // Pre-generate a new CV in case deletions make the list empty
     const newCVIfEmpty = generateNewCV();
@@ -203,5 +215,6 @@ export function useCVStorage() {
     updateCV,
     deleteCV,
     clearAll,
+    duplicateCV,
   };
 }
