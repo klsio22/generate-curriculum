@@ -23,7 +23,11 @@ const SectionHeader = ({ title }: { title: string }) => (
   </h3>
 );
 
-export const CVForm: React.FC<CVFormProps> = ({ register, control, onSave }) => {
+export const CVForm: React.FC<CVFormProps> = ({
+  register,
+  control,
+  onSave,
+}) => {
   const callSave = () => {
     if (onSave) onSave();
   };
@@ -266,7 +270,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control, onSave }) => 
               <textarea
                 {...reg(`experience.${index}.description`)}
                 rows={3}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+                className="mt-1 block w-full h-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
           </div>
@@ -294,7 +298,7 @@ export const CVForm: React.FC<CVFormProps> = ({ register, control, onSave }) => 
         <textarea
           {...reg('skills')}
           rows={4}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+          className="mt-1 block w-full h-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Liste suas principais habilidades (uma por linha)..."
         />
       </div>
