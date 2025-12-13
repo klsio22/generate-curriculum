@@ -31,7 +31,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
               {data.jobTitle || 'Profissional'}
             </p>
           </div>
-          <div className="w-50">
+          <div className="w-2/5">
             {/* CONTATO */}
             <div className="mb-6">
               <h2 className={sectionTitleClass} style={{ color: primaryColor }}>
