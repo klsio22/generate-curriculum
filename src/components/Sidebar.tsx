@@ -21,6 +21,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isOpen,
   toggleSidebar,
 }) => {
+  const dialogRef = React.useRef<HTMLDialogElement | null>(null);
+  const [pendingDeleteId, setPendingDeleteId] = React.useState<string | null>(null);
+
+  const openConfirm = (id: string) => {
+    setPendingDeleteId(id);
+    // open native dialog provided by daisyUI
+    dialogRef.current?.showModal();
+  };
+
+  const closeConfirm = () => {
+    dialogRef.current?.close();
+    setPendingDeleteId(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (pendingDeleteId) {
+      onDelete(pendingDeleteId);
+    }
+    closeConfirm();
+  };
   return (
     <>
       {/* Overlay for mobile */}
@@ -80,11 +100,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (
-                      confirm('Tem certeza que deseja excluir este currículo?')
-                    ) {
-                      onDelete(cv.id);
-                    }
+                    openConfirm(cv.id);
                   }}
                   className="text-gray-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1"
                   title="Excluir"
@@ -94,6 +110,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
             ))}
           </div>
+
+          <dialog ref={dialogRef} className="modal">
+            <form method="dialog" className="modal-box">
+              <h3 className="font-bold text-lg">Confirmar exclusão</h3>
+              <p className="py-4">Tem certeza que deseja excluir este currículo?</p>
+              <div className="modal-action">
+                <button type="button" onClick={closeConfirm} className="btn">
+                  Cancelar
+                </button>
+                <button type="button" onClick={handleConfirmDelete} className="btn btn-error">
+                  Excluir
+                </button>
+              </div>
+            </form>
+          </dialog>
 
           <div className="mt-auto pt-4 border-t border-gray-800 text-xs text-center text-gray-500">
             {cvs.length} currículo(s) salvo(s)
