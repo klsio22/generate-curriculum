@@ -80,9 +80,12 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
           if (idx === undefined || !data.experience?.[idx]) return null;
           const exp = data.experience[idx];
           return (
-            <div className="mb-5">
+            <div className="item-container mb-5">
               <p className="font-bold text-sm text-gray-900">{exp.role}</p>
               <p className="text-xs text-gray-600 italic mb-1">{exp.company}</p>
+              <div className="text-xs text-gray-600 mb-2">
+                {formatDate(exp.startDate)}{exp.endDate ? ` - ${formatDate(exp.endDate)}` : ' - Atual'}
+              </div>
               {exp.description && (
                 <ul className="list-disc ml-4 space-y-0.5">
                   {exp.description
@@ -254,32 +257,14 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
       </div>
     );
 
-    // Sidebar content
+    // Sidebar content (nome apenas; datas agora aparecem ao lado das experiências)
     const renderSidebar = () => (
       <div className="w-32 bg-gradient-to-b from-blue-900 to-blue-800 text-white pt-6 px-3 flex flex-col min-h-full">
-        {/* Nome na sidebar (menor) */}
         <div className="mb-6 pb-4 border-b border-blue-700">
           <p className="font-bold text-xs text-white">{data.fullName}</p>
         </div>
 
-        {/* Datas de experiência na sidebar */}
-        {data.experience && data.experience.length > 0 && (
-          <div className="text-xs space-y-3 flex-1">
-            {data.experience.map((exp, idx) => (
-              <div key={idx} className="text-center py-2 border-b border-blue-700 text-blue-100">
-                <div className="font-semibold text-white text-xs whitespace-nowrap">
-                  {formatDate(exp.startDate)}
-                </div>
-                {exp.endDate && (
-                  <div className="text-blue-200 text-xs">- {formatDate(exp.endDate)}</div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Espaçador */}
-        <div className="flex-1"></div>
+        <div className="flex-1" />
       </div>
     );
 
