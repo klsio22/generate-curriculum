@@ -125,13 +125,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
               <h2 className="font-bold text-sm text-gray-900 mb-3">HABILIDADES</h2>
               <div className="space-y-2">
                 {skillsList.map((skill, idx) => (
-                  <div key={idx} className="flex items-center justify-between">
+                  <div key={idx} className="">
                     <p className="text-xs text-gray-700">{skill.trim().replace(/^•\s*/, '')}</p>
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className="text-yellow-500 text-xs">★</span>
-                      ))}
-                    </div>
                   </div>
                 ))}
               </div>
@@ -147,13 +142,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
               <h2 className="font-bold text-sm text-gray-900 mb-3">IDIOMAS</h2>
               <div className="space-y-2">
                 {langsList.map((lang, idx) => (
-                  <div key={idx} className="flex items-center justify-between">
+                  <div key={idx} className="">
                     <p className="text-xs text-gray-700">{lang.trim()}</p>
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className="text-yellow-500 text-xs">★</span>
-                      ))}
-                    </div>
                   </div>
                 ))}
               </div>
