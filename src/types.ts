@@ -35,6 +35,9 @@ export interface CVData {
   education: Education[];
   experience: Experience[];
   skills: string;
+  languages?: string; // multiline list of languages
+  softSkills?: string; // multiline list of soft skills
+  customFields?: { id: string; label: string; value: string }[];
   references?: Reference[];
 }
 

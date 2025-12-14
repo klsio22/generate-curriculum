@@ -48,6 +48,9 @@ export const defaultCV: CVData = {
   ],
   skills:
     'Análise de Sistemas\nPesquisa de Usuários\nMachine Learning\nMetodologia Ágil\nBanco de Dados',
+  languages: '',
+  softSkills: '',
+  customFields: [],
   references: [
     {
       id: '1',

@@ -7,10 +7,8 @@ interface CVPreviewProps {
 
 export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
   ({ data }: CVPreviewProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-    // Styling constants - cor azul da imagem: #4657F1
     const primaryColor = '#4657F1';
 
-    // Centralized style variables for easy future adjustments
     const styles = {
       titleClass: 'font-bold text-3xl mb-2',
       subtitleClass: 'text-sm uppercase font-normal',
@@ -166,6 +164,28 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                     </p>
                   </div>
                 ))}
+
+                {/* SOFT SKILLS */}
+                {data.softSkills && data.softSkills.trim() && (
+                  <div className="mb-6">
+                    <h2
+                      className={styles.sectionTitleClass}
+                      style={{ color: primaryColor }}
+                    >
+                      SOFT SKILLS
+                    </h2>
+                    <ul className="space-y-1">
+                      {data.softSkills
+                        .split('\n')
+                        .filter((s) => s.trim())
+                        .map((s, i) => (
+                          <li key={i} className={styles.listItemClass}>
+                            {s.trim()}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             )}
 
@@ -191,6 +211,42 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                         </li>
                       ))}
                   </ul>
+                </div>
+              )}
+
+              {/* IDIOMAS */}
+              {data.languages && data.languages.trim() && (
+                <div className="mb-6">
+                  <h2
+                    className={styles.sectionTitleClass}
+                    style={{ color: primaryColor }}
+                  >
+                    IDIOMAS
+                  </h2>
+                  <ul className="space-y-1">
+                    {data.languages
+                      .split('\n')
+                      .filter((l) => l.trim())
+                      .map((l, i) => (
+                        <li key={i} className={styles.listItemClass}>
+                          {l.trim()}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* CUSTOM FIELDS */}
+              {data.customFields && data.customFields.length > 0 && (
+                <div className="mb-6">
+                  {data.customFields.map((cf, i) =>
+                    cf.label && cf.value ? (
+                      <div key={i} className="mb-3">
+                        <p className={styles.itemTitleClass}>{cf.label}</p>
+                        <p className={styles.listItemClass}>{cf.value}</p>
+                      </div>
+                    ) : null
+                  )}
                 </div>
               )}
 

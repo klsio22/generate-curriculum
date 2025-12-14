@@ -60,6 +60,15 @@ export const CVForm: React.FC<CVFormProps> = ({
     name: 'references',
   });
 
+  const {
+    fields: customFields,
+    append: appendCustom,
+    remove: removeCustom,
+  } = useFieldArray({
+    control,
+    name: 'customFields',
+  });
+
   return (
     <div className="bg-white p-6 shadow rounded-lg space-y-4">
       <SectionHeader title="Dados Pessoais" />
@@ -302,6 +311,66 @@ export const CVForm: React.FC<CVFormProps> = ({
           placeholder="Liste suas principais habilidades (uma por linha)..."
         />
       </div>
+
+      <SectionHeader title="Idiomas" />
+      <div>
+        <textarea
+          {...reg('languages')}
+          rows={3}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+          placeholder="Ex: Português (Nativo)\nInglês (Avançado)..."
+        />
+      </div>
+
+      <SectionHeader title="Soft Skills" />
+      <div>
+        <textarea
+          {...reg('softSkills')}
+          rows={3}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+          placeholder="Ex: Comunicação, Trabalho em equipe..."
+        />
+      </div>
+
+      <SectionHeader title="Campos Personalizados" />
+      {customFields.map((field, index) => (
+        <div key={field.id} className="bg-gray-50 p-4 rounded-md mb-3 border relative">
+          <button
+            type="button"
+            onClick={() => removeCustom(index)}
+            className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+          >
+            <Trash2 size={18} />
+          </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Rótulo</label>
+              <input
+                {...reg(`customFields.${index}.label` as Path<CVData>)}
+                placeholder="Ex: Certificações"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Valor</label>
+              <input
+                {...reg(`customFields.${index}.value` as Path<CVData>)}
+                placeholder="Conteúdo do campo"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={() =>
+          appendCustom({ id: '', label: '', value: '' })
+        }
+        className="flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
+      >
+        <Plus size={18} className="mr-1" /> Adicionar Campo
+      </button>
 
       <SectionHeader title="Referências" />
       {refFields.map((field, index) => (
