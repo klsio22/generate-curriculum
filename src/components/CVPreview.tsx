@@ -9,8 +9,22 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
   ({ data }: CVPreviewProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     // Styling constants - cor azul da imagem: #4657F1
     const primaryColor = '#4657F1';
-    const sectionTitleClass = 'uppercase font-bold text-[12px] mb-3';
-    const textClass = 'text-[11px] leading-relaxed mb-2';
+
+    // Centralized style variables for easy future adjustments
+    const styles = {
+      titleClass: 'font-bold text-3xl mb-2',
+      subtitleClass: 'text-sm uppercase font-normal',
+      sectionTitleClass: 'uppercase font-bold text-[14px] mb-3',
+      textClass: 'text-[12px] leading-relaxed mb-2',
+      itemTitleClass: 'font-bold text-[12px] mb-1',
+      itemMetaClass: 'text-[12px] mb-2',
+      listItemClass: 'text-[12px] leading-relaxed',
+      eduInstitutionClass: 'font-bold text-[12px]',
+      eduCourseClass: 'text-[12px]',
+      eduDateClass: 'text-[12px] text-gray-600',
+      skillsItemClass: 'text-[12px]',
+      refBlockClass: 'mb-3 text-sm',
+    } as const;
 
     return (
       <div
@@ -21,20 +35,20 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
         <div className="flex justify-between ">
           {/* Header - Nome e Cargo */}
           <div className="flex flex-col w-1/2">
-            <h1
-              className="font-bold text-3xl mb-2"
-              style={{ color: primaryColor }}
-            >
+            <h1 className={styles.titleClass} style={{ color: primaryColor }}>
               {data.fullName}
             </h1>
-            <p className="text-sm uppercase font-normal">
+            <p className={styles.subtitleClass}>
               {data.jobTitle || 'Profissional'}
             </p>
           </div>
           <div className="w-2/5">
             {/* CONTATO */}
             <div className="mb-6">
-              <h2 className={sectionTitleClass} style={{ color: primaryColor }}>
+              <h2
+                className={styles.sectionTitleClass}
+                style={{ color: primaryColor }}
+              >
                 CONTATO
               </h2>
               <div className="space-y-2 text-sm">
@@ -63,7 +77,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                 )}
                 {data.address && (
                   <p>
-                    <span className="font-semibold">Endereço:</span> {data.address}
+                    <span className="font-semibold">Endereço:</span>{' '}
+                    {data.address}
                   </p>
                 )}
               </div>
@@ -79,12 +94,12 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             {data.objective && (
               <div className="mb-6">
                 <h2
-                  className={sectionTitleClass}
+                  className={styles.sectionTitleClass}
                   style={{ color: primaryColor }}
                 >
                   PERFIL
                 </h2>
-                <p className={textClass}>{data.objective}</p>
+                <p className={styles.textClass}>{data.objective}</p>
               </div>
             )}
 
@@ -92,15 +107,15 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             {data.experience && data.experience.length > 0 && (
               <div className="mb-6">
                 <h2
-                  className={sectionTitleClass}
+                  className={styles.sectionTitleClass}
                   style={{ color: primaryColor }}
                 >
                   EXPERIÊNCIA PROFISSIONAL
                 </h2>
                 {data.experience.map((exp, idx) => (
                   <div key={idx} className="mb-5">
-                    <p className="font-bold text-[11px] mb-1">{exp.role}</p>
-                    <p className="text-[11px] mb-2">
+                    <p className={styles.itemTitleClass}>{exp.role}</p>
+                    <p className={styles.itemMetaClass}>
                       {exp.company} | {exp.startDate} - {exp.endDate}
                     </p>
                     {exp.description && (
@@ -109,7 +124,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                           .split('\n')
                           .filter((line) => line.trim())
                           .map((line, i) => (
-                            <li key={i} className="text-[11px] leading-relaxed">
+                            <li key={i} className={styles.listItemClass}>
                               {line.trim()}
                             </li>
                           ))}
@@ -118,7 +133,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                     {exp.achievements && exp.achievements.length > 0 && (
                       <ul className="list-disc ml-5 space-y-1">
                         {exp.achievements.map((achievement, i) => (
-                          <li key={i} className="text-[11px] leading-relaxed">
+                          <li key={i} className={styles.listItemClass}>
                             {achievement}
                           </li>
                         ))}
@@ -135,16 +150,18 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             {data.education && data.education.length > 0 && (
               <div className="mb-6">
                 <h2
-                  className={sectionTitleClass}
+                  className={styles.sectionTitleClass}
                   style={{ color: primaryColor }}
                 >
                   FORMAÇÃO ACADÊMICA
                 </h2>
                 {data.education.map((edu, idx) => (
                   <div key={idx} className="mb-4">
-                    <p className="font-bold text-[11px]">{edu.institution}</p>
-                    <p className="text-[11px]">{edu.course}</p>
-                    <p className="text-[11px] text-gray-600">
+                    <p className={styles.eduInstitutionClass}>
+                      {edu.institution}
+                    </p>
+                    <p className={styles.eduCourseClass}>{edu.course}</p>
+                    <p className={styles.eduDateClass}>
                       {edu.startDate} - {edu.endDate}
                     </p>
                   </div>
@@ -157,7 +174,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
               {data.skills && (
                 <div className="mb-6">
                   <h2
-                    className={sectionTitleClass}
+                    className={styles.sectionTitleClass}
                     style={{ color: primaryColor }}
                   >
                     HABILIDADES
@@ -167,7 +184,7 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                       .split('\n')
                       .filter((skill) => skill.trim())
                       .map((skill, idx) => (
-                        <li key={idx} className="text-[11px]">
+                        <li key={idx} className={styles.skillsItemClass}>
                           {skill.trim().startsWith('•')
                             ? skill.trim()
                             : `• ${skill.trim()}`}
@@ -181,13 +198,13 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
               {data.references && data.references.length > 0 && (
                 <div className="mb-6">
                   <h2
-                    className={sectionTitleClass}
+                    className={styles.sectionTitleClass}
                     style={{ color: primaryColor }}
                   >
                     REFERÊNCIAS
                   </h2>
                   {data.references.map((ref, idx) => (
-                    <div key={idx} className="mb-3 text-sm">
+                    <div key={idx} className={styles.refBlockClass}>
                       <p className="font-bold">{ref.name}</p>
                       {ref.email && <p>E-mail: {ref.email}</p>}
                       {ref.phone && <p>Telefone: {ref.phone}</p>}
