@@ -105,7 +105,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           <button
             onClick={() => onRequestClear()}
-            className="flex items-center justify-center gap-2 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors mb-4"
+            className="flex items-center justify-center gap-2 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 
+            rounded transition-colors mb-4"
           >
             Limpar dados
           </button>
