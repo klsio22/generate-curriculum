@@ -86,8 +86,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
                   {exp.description
                     .split('\n')
                     .filter((line) => line.trim())
-                    .map((line, i) => (
-                      <li key={i} className="text-xs text-gray-700">
+                    .map((line) => (
+                      <li key={`${exp.company}-${line.trim()}`} className="text-xs text-gray-700">
                         {line.trim()}
                       </li>
                     ))}
@@ -104,8 +104,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             <div className="mb-6">
               <h2 className="font-bold text-sm text-gray-900 mb-3">FORMAÇÃO ACADÊMICA</h2>
               <div className="space-y-3">
-                {eduItems.map((edu, idx) => (
-                  <div key={idx}>
+                {eduItems.map((edu) => (
+                  <div key={`${edu.institution}-${edu.course}`}>
                     <p className="font-bold text-sm text-gray-900">{edu.institution}</p>
                     <p className="text-xs text-gray-600 italic">{edu.course}</p>
                     {/** Show free-text dates provided by the user (no parsing) */}
@@ -128,8 +128,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             <div className="mb-6">
               <h2 className="font-bold text-sm text-gray-900 mb-3">HABILIDADES</h2>
               <div className="space-y-2">
-                {skillsList.map((skill, idx) => (
-                  <div key={idx} className="">
+                {skillsList.map((skill) => (
+                  <div key={skill.trim()} className="">
                     <p className="text-xs text-gray-700">{skill.trim().replace(/^•\s*/, '')}</p>
                   </div>
                 ))}
@@ -145,8 +145,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             <div className="mb-6">
               <h2 className="font-bold text-sm text-gray-900 mb-3">IDIOMAS</h2>
               <div className="space-y-2">
-                {langsList.map((lang, idx) => (
-                  <div key={idx} className="">
+                {langsList.map((lang) => (
+                  <div key={lang.trim()} className="">
                     <p className="text-xs text-gray-700">{lang.trim()}</p>
                   </div>
                 ))}
@@ -162,8 +162,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             <div className="mb-6">
               <h2 className="font-bold text-sm text-gray-900 mb-3">SOFT SKILLS</h2>
               <ul className="space-y-1">
-                {softList.map((s, i) => (
-                  <li key={i} className="text-xs text-gray-700">• {s.trim()}</li>
+                {softList.map((s) => (
+                  <li key={s.trim()} className="text-xs text-gray-700">• {s.trim()}</li>
                 ))}
               </ul>
             </div>
@@ -177,8 +177,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             <div className="mb-6">
               <h2 className="font-bold text-sm text-gray-900 mb-3">REFERÊNCIAS</h2>
               <div className="space-y-3">
-                {refs.map((ref, idx) => (
-                  <div key={idx}>
+                {refs.map((ref) => (
+                  <div key={`${ref.name}-${ref.email || ref.phone}`}>
                     <p className="font-bold text-sm text-gray-900">{ref.name}</p>
                     {ref.email && <p className="text-xs text-gray-600">E-mail: {ref.email}</p>}
                     {ref.phone && <p className="text-xs text-gray-600">Telefone: {ref.phone}</p>}
@@ -308,8 +308,8 @@ export const CVPreview = React.forwardRef<HTMLDivElement, CVPreviewProps>(
             <div className="mb-4">
               <h3 className="text-xs font-semibold text-white mb-1">Principais competências</h3>
               <ul className="text-white text-xs leading-6 list-none space-y-1">
-                {topSkills.map((s, i) => (
-                  <li key={i} className="wrap-break-word">{s.replace(/^•\s*/, '')}</li>
+                {topSkills.map((s) => (
+                  <li key={s} className="wrap-break-word">{s.replace(/^•\s*/, '')}</li>
                 ))}
               </ul>
             </div>
