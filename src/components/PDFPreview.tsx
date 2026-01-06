@@ -1,8 +1,15 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  PDFViewer,
+} from '@react-pdf/renderer';
 import type { CVData } from '../types';
 
-interface PDFPreviewProps {
+export interface PDFPreviewProps {
   data: CVData;
 }
 
@@ -136,39 +143,13 @@ const formatDate = (dateStr: string | undefined): string => {
   return dateStr.trim();
 };
 
-// PDFDownloadButton Component - handles different states
-interface PDFDownloadButtonProps {
-  loading: boolean;
-  error: Error | null;
-}
-
-const PDFDownloadButton =  ({ loading, error }: PDFDownloadButtonProps) => {
-  if (loading) {
-    return (
-      <button disabled className="px-4 py-2 bg-gray-400 text-white rounded-lg cursor-not-allowed">
-        Gerando PDF...
-      </button>
-    );
-  }
-
-  if (error) {
-    return (
-      <button disabled className="px-4 py-2 bg-red-500 text-white rounded-lg">
-        Erro ao gerar PDF
-      </button>
-    );
-  }
-
-  return (
-    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">
-      📥 Baixar PDF
-    </button>
-  );
-};
-
 // PDF Document Component
 const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
-  const skillsList = data.skills?.split('\n').map((s) => s.trim()).filter(Boolean) || [];
+  const skillsList =
+    data.skills
+      ?.split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean) || [];
   const topSkills = skillsList.slice(0, 6);
   const langsList = data.languages?.split('\n').filter((l) => l.trim()) || [];
   const softList = data.softSkills?.split('\n').filter((s) => s.trim()) || [];
@@ -187,14 +168,10 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
             {data.email && <Text style={styles.sidebarText}>{data.email}</Text>}
             {data.phone && <Text style={styles.sidebarText}>{data.phone}</Text>}
             {data.linkedin && (
-              <Text style={styles.sidebarLink}>
-                {data.linkedin}
-              </Text>
+              <Text style={styles.sidebarLink}>{data.linkedin}</Text>
             )}
             {data.portfolio && (
-              <Text style={styles.sidebarLink}>
-                {data.portfolio}
-              </Text>
+              <Text style={styles.sidebarLink}>{data.portfolio}</Text>
             )}
           </View>
 
@@ -240,7 +217,9 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.fullName}>{data.fullName}</Text>
-            {data.jobTitle && <Text style={styles.jobTitle}>{data.jobTitle}</Text>}
+            {data.jobTitle && (
+              <Text style={styles.jobTitle}>{data.jobTitle}</Text>
+            )}
             <View style={styles.headerInfo}>
               {data.email && <Text>{data.email}</Text>}
               {data.phone && <Text>{data.phone}</Text>}
@@ -261,7 +240,10 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
             <View style={styles.sectionContent}>
               <Text style={styles.sectionTitle}>EXPERIÊNCIA PROFISSIONAL</Text>
               {data.experience.map((exp) => (
-                <View key={`${exp.company}-${exp.role}`} style={styles.itemContainer}>
+                <View
+                  key={`${exp.company}-${exp.role}`}
+                  style={styles.itemContainer}
+                >
                   <Text style={styles.itemTitle}>{exp.role}</Text>
                   <Text style={styles.itemSubtitle}>{exp.company}</Text>
                   <Text style={styles.itemDate}>
@@ -274,7 +256,10 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
                         .split('\n')
                         .filter((line) => line.trim())
                         .map((line) => (
-                          <Text key={`${exp.company}-${line.trim()}`} style={styles.bulletItem}>
+                          <Text
+                            key={`${exp.company}-${line.trim()}`}
+                            style={styles.bulletItem}
+                          >
                             • {line.trim()}
                           </Text>
                         ))}
@@ -290,7 +275,10 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
             <View style={styles.sectionContent}>
               <Text style={styles.sectionTitle}>FORMAÇÃO ACADÊMICA</Text>
               {data.education.map((edu) => (
-                <View key={`${edu.institution}-${edu.course}`} style={styles.itemContainer}>
+                <View
+                  key={`${edu.institution}-${edu.course}`}
+                  style={styles.itemContainer}
+                >
                   <Text style={styles.itemTitle}>{edu.institution}</Text>
                   <Text style={styles.itemSubtitle}>{edu.course}</Text>
                   {(edu.startDate || edu.endDate) && (
@@ -321,10 +309,19 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
             <View style={styles.sectionContent}>
               <Text style={styles.sectionTitle}>REFERÊNCIAS</Text>
               {data.references.map((ref) => (
-                <View key={`${ref.name}-${ref.email || ref.phone}`} style={styles.itemContainer}>
+                <View
+                  key={`${ref.name}-${ref.email || ref.phone}`}
+                  style={styles.itemContainer}
+                >
                   <Text style={styles.itemTitle}>{ref.name}</Text>
-                  {ref.email && <Text style={styles.itemSubtitle}>E-mail: {ref.email}</Text>}
-                  {ref.phone && <Text style={styles.itemSubtitle}>Telefone: {ref.phone}</Text>}
+                  {ref.email && (
+                    <Text style={styles.itemSubtitle}>E-mail: {ref.email}</Text>
+                  )}
+                  {ref.phone && (
+                    <Text style={styles.itemSubtitle}>
+                      Telefone: {ref.phone}
+                    </Text>
+                  )}
                 </View>
               ))}
             </View>
@@ -337,13 +334,21 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
 
 export const PDFPreview = ({ data }: PDFPreviewProps) => {
   return (
-    <PDFDownloadLink
-      document={<CVDocument data={data} />}
-      fileName={`CV_${data.fullName.replaceAll(' ', '_')}.pdf`}
+    <div
+      style={{
+        height: 800,
+        border: '1px solid #e5e7eb',
+        borderRadius: 8,
+        overflow: 'hidden',
+        width: '100%',
+      }}
     >
-      {({ loading, error }) => <PDFDownloadButton loading={loading} error={error} />}
-    </PDFDownloadLink>
+      <PDFViewer style={{ width: '100%', height: '100%' }}>
+        <CVDocument data={data} />
+      </PDFViewer>
+    </div>
   );
 };
 
-export default CVDocument;
+export { CVDocument };
+export default PDFPreview;
