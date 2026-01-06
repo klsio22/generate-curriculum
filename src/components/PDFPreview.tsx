@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     fontFamily: 'Helvetica',
   },
+
   sidebar: {
     width: '25%',
     backgroundColor: '#1e3a8a', // blue-900
@@ -27,11 +28,14 @@ const styles = StyleSheet.create({
     padding: 24,
     flexDirection: 'column',
   },
+
   mainContent: {
     width: '75%',
     padding: 32,
     flexDirection: 'column',
+    margin: 0,
   },
+  
   sidebarName: {
     fontSize: 10,
     fontWeight: 'bold',
@@ -237,7 +241,8 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
 
           {/* Experience */}
           {data.experience && data.experience.length > 0 && (
-            <View style={styles.sectionContent}>
+            <View style={styles.sectionContent} >
+              
               <Text style={styles.sectionTitle}>EXPERIÊNCIA PROFISSIONAL</Text>
               {data.experience.map((exp) => (
                 <View
