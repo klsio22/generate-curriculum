@@ -93,12 +93,10 @@ function App() {
           createCV();
           if (window.innerWidth < 1024) setIsSidebarOpen(false);
         }}
-        onDelete={deleteCV}
         onDuplicate={(id: string) => {
           duplicateCV(id);
           if (window.innerWidth < 1024) setIsSidebarOpen(false);
         }}
-        clearAll={clearAll}
         onRequestDelete={handleRequestDelete}
         onRequestClear={handleRequestClear}
         isOpen={isSidebarOpen}
