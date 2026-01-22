@@ -21,78 +21,12 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
       ?.split('\n')
       .map((s) => s.trim())
       .filter(Boolean) || [];
-  const topSkills = skillsList.slice(0, 6);
   const langsList = data.languages?.split('\n').filter((l) => l.trim()) || [];
   const softList = data.softSkills?.split('\n').filter((s) => s.trim()) || [];
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* SIDEBAR */}
-        <View style={styles.sidebar}>
-          <View style={styles.sidebarContent}>
-            {/* Name */}
-            <Text style={styles.sidebarName}>{data.fullName}</Text>
-
-            {/* Contact Section */}
-            <View style={styles.sidebarSection}>
-              <Text style={styles.sidebarTitle}>Contato</Text>
-              {data.email && (
-                <Text style={styles.sidebarText}>{data.email}</Text>
-              )}
-              {data.phone && (
-                <Text style={styles.sidebarText}>{data.phone}</Text>
-              )}
-              {data.linkedin && (
-                <Link style={styles.sidebarLink} src={data.linkedin}>
-                  {wrapAndTruncate(data.linkedin, 24, 1)}
-                </Link>
-              )}
-              {data.portfolio && (
-                <Link style={styles.sidebarLink} src={data.portfolio}>
-                  {wrapAndTruncate(data.portfolio, 30, 2)}
-                </Link>
-              )}
-            </View>
-
-            {/* Main Skills Section */}
-            {topSkills.length > 0 && (
-              <View style={styles.sidebarSection}>
-                <Text style={styles.sidebarTitle}>Principais competências</Text>
-                {topSkills.map((skill) => (
-                  <Text key={skill} style={styles.skillItem}>
-                    • {skill.replace(/^•\s*/, '')}
-                  </Text>
-                ))}
-              </View>
-            )}
-
-            {/* Languages */}
-            {langsList.length > 0 && (
-              <View style={styles.sidebarSection}>
-                <Text style={styles.sidebarTitle}>Idiomas</Text>
-                {langsList.map((lang) => (
-                  <Text key={lang} style={styles.sidebarText}>
-                    {lang.trim()}
-                  </Text>
-                ))}
-              </View>
-            )}
-
-            {/* Soft Skills */}
-            {softList.length > 0 && (
-              <View style={styles.sidebarSection}>
-                <Text style={styles.sidebarTitle}>Soft Skills</Text>
-                {softList.map((s) => (
-                  <Text key={s} style={styles.sidebarText}>
-                    • {s.trim()}
-                  </Text>
-                ))}
-              </View>
-            )}
-          </View>
-        </View>
-
         {/* MAIN CONTENT */}
         <View style={styles.mainContent}>
           {/* Header */}
@@ -105,6 +39,21 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
               {data.email && <Text>{data.email}</Text>}
               {data.phone && <Text>{data.phone}</Text>}
               {data.address && <Text>{data.address}</Text>}
+              {(data.linkedin || data.portfolio) && (
+                <Text>
+                  {data.linkedin && (
+                    <>
+                      LinkedIn: {data.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                    </>
+                  )}
+                  {data.linkedin && data.portfolio && ' • '}
+                  {data.portfolio && (
+                    <>
+                      Portfolio: {data.portfolio.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                    </>
+                  )}
+                </Text>
+              )}
             </View>
           </View>
 
@@ -180,6 +129,30 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
               {skillsList.map((skill) => (
                 <Text key={skill} style={styles.bulletItem}>
                   • {skill.trim().replace(/^•\s*/, '')}
+                </Text>
+              ))}
+            </View>
+          )}
+
+          {/* Languages */}
+          {langsList.length > 0 && (
+            <View style={styles.sectionContent}>
+              <Text style={styles.sectionTitle}>IDIOMAS</Text>
+              {langsList.map((lang) => (
+                <Text key={lang} style={styles.bulletItem}>
+                  • {lang.trim()}
+                </Text>
+              ))}
+            </View>
+          )}
+
+          {/* Soft Skills */}
+          {softList.length > 0 && (
+            <View style={styles.sectionContent}>
+              <Text style={styles.sectionTitle}>SOFT SKILLS</Text>
+              {softList.map((s) => (
+                <Text key={s} style={styles.bulletItem}>
+                  • {s.trim()}
                 </Text>
               ))}
             </View>
