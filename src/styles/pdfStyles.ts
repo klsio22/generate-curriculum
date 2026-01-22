@@ -68,6 +68,15 @@ export const pdfStyles = StyleSheet.create({
     color: '#1d4ed8',
     marginRight: 12,
   },
+  socialItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  icon: {
+    fontSize: 10,
+    marginRight: 6,
+  },
   sectionTitle: {
     fontSize: 11,
     fontWeight: 'bold',
