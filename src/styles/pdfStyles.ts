@@ -55,7 +55,18 @@ export const pdfStyles = StyleSheet.create({
   headerInfo: {
     fontSize: 9,
     color: '#444444',
-    lineHeight: 1.5,
+    lineHeight: 1.8,
+    marginTop: 6,
+  },
+  linksContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 6,
+  },
+  linkText: {
+    fontSize: 9,
+    color: '#1d4ed8',
+    marginRight: 12,
   },
   sectionTitle: {
     fontSize: 11,
