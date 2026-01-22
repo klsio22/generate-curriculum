@@ -4,6 +4,7 @@ export interface Education {
   institution: string;
   startDate: string;
   endDate: string;
+  topics?: string; // multiline list of topics/courses seen at university
 }
 
 export interface Experience {

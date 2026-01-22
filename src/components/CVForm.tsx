@@ -332,6 +332,16 @@ export const CVForm: React.FC<CVFormProps> = ({
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
+            <div className="md:col-span-2">
+              <label htmlFor={`education-${index}-topics`} className="block text-sm font-medium text-gray-700">Tópicos / Disciplinas (uma por linha)</label>
+              <textarea
+                id={`education-${index}-topics`}
+                {...reg((`education.${index}.topics`) as Path<CVData>)}
+                placeholder={"Ex: Deep Learning\nNatural Language Processing\nAdvanced Operating Systems"}
+                rows={3}
+                className="mt-1 block w-full h-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+              />
+            </div>
           </div>
         </div>
       ))}
@@ -344,6 +354,7 @@ export const CVForm: React.FC<CVFormProps> = ({
             institution: '',
             startDate: '',
             endDate: '',
+            topics: '',
           });
           setTimeout(() => callSave(), 0);
         }}

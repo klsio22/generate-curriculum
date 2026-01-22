@@ -152,6 +152,15 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
                       {edu.endDate ? ` - ${formatDate(edu.endDate)}` : ''}
                     </Text>
                   )}
+                  {edu.topics && (
+                    <Text style={styles.itemSubtitle}>
+                      {edu.topics
+                        .split('\n')
+                        .map((t) => t.trim())
+                        .filter(Boolean)
+                        .join(', ')}
+                    </Text>
+                  )}
                 </View>
               ))}
             </View>

@@ -21,6 +21,7 @@ export const defaultCV: CVData = {
       institution: 'Universidade de Monte Verde',
       startDate: 'Maio de 2030',
       endDate: 'Maio de 2032',
+      topics: 'Deep Learning\nNatural Language Processing\nAdvanced Operating Systems\nDistributed Computing\nComputer Networks',
     },
     {
       id: '2',
@@ -28,6 +29,7 @@ export const defaultCV: CVData = {
       institution: 'Universidade de Monte Verde',
       startDate: 'Jun 2026',
       endDate: 'Jun 2030',
+      topics: 'Applied Mathematics\nDiscrete Mathematics\nAlgorithms\nDatabases\nMachine Learning\nArtificial Intelligence\nNatural Language Processing\nCloud Computing\nDistributed Computing',
     },
   ],
   experience: [
