@@ -3,8 +3,7 @@ import type { SavedCV } from '../types';
 import { defaultCV } from '../data/defaultCV';
 
 const STORAGE_KEY = 'cv-data';
-
-
+const SELECTED_KEY = 'cv-selected-id';
 
 const generateNewCV = (index: number = 0): SavedCV => {
   return {
@@ -140,9 +139,19 @@ function initCVState(): State {
     initialCvs = [generateNewCV()];
   }
 
+  let activeId = initialCvs[0].id;
+  try {
+    const storedSelected = localStorage.getItem(SELECTED_KEY);
+    if (storedSelected && initialCvs.some((cv) => cv.id === storedSelected)) {
+      activeId = storedSelected;
+    }
+  } catch (e) {
+    console.error('Failed to parse selected CV id', e);
+  }
+
   return {
     cvs: initialCvs,
-    activeId: initialCvs[0].id,
+    activeId,
     initialized: true,
   };
 }
@@ -150,12 +159,21 @@ function initCVState(): State {
 export function useCVStorage() {
   const [state, dispatch] = useReducer(reducer, null, initCVState);
 
-  // Persist to storage whenever cvs change
   useEffect(() => {
     if (state.initialized && state.cvs.length > 0) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state.cvs));
     }
   }, [state.cvs, state.initialized]);
+
+  useEffect(() => {
+    if (state.initialized && state.activeId) {
+      try {
+        localStorage.setItem(SELECTED_KEY, state.activeId);
+      } catch (e) {
+        console.error('Failed to persist selected CV id', e);
+      }
+    }
+  }, [state.activeId, state.initialized]);
 
   const createCV = useCallback(() => {
     const newCV = generateNewCV(state.cvs.length);
