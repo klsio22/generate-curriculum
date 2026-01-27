@@ -170,7 +170,7 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
                     </Text>
                   )}
                   {edu.topics && (
-                    <Text style={styles.itemSubtitle}>
+                    <Text style={styles.bulletItem}>
                       {edu.topics
                         .split('\n')
                         .map((t) => t.trim())
