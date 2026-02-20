@@ -195,10 +195,10 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
             </View>
           )}
 
-          {/* Projects */}
+          {/* Academic / Technical Projects */}
           {data.projects && data.projects.length > 0 && (
             <View style={styles.sectionContent}>
-              <Text style={styles.sectionTitle}>PROJETOS</Text>
+              <Text style={styles.sectionTitle}>PROJETOS ACADÊMICOS</Text>
               {data.projects.map((project) => (
                 <View
                   key={`${project.name}-${project.id}`}
@@ -227,15 +227,21 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
             </View>
           )}
 
-            {/* Academic / Technical Projects */}
-            {data.academicProjects && (
-              <View style={styles.sectionContent}>
-                <Text style={styles.sectionTitle}>PROJETOS ACADÊMICOS E TÉCNICOS</Text>
+
+
+          {/* Projects technical */}
+          {data.academicProjects && (
+            <View style={styles.sectionContent}>
+              <Text style={styles.sectionTitle}>PROJETOS TÉCNICOS</Text>
+              <View style={styles.sectionBody}>
                 <View style={styles.bulletList}>
                   {renderDescription(data.academicProjects, 'academic')}
                 </View>
               </View>
-            )}
+            </View>
+          )}
+
+
 
           {/* Languages */}
           {langsList.length > 0 && (
@@ -313,7 +319,7 @@ export const PDFPreview = ({ data }: PDFPreviewProps) => {
     <div className="h-192 max-h-max border border-gray-200 rounded-lg overflow-hidden w-full">
       {loading ? (
         <div className="flex items-center justify-center h-full">
-          <span className="loading loading-spinner loading-xl w-20"/>
+          <span className="loading loading-spinner loading-xl w-20" />
         </div>
       ) : (
         <PDFViewer style={{ width: '100%', height: '100%' }}>

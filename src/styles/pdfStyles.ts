@@ -120,7 +120,7 @@ export const pdfStyles = StyleSheet.create({
     fontSize: 9,
     fontWeight: 'bold',
     color: '#000000',
-    marginBottom: 2,
+    marginBottom: 4,
     marginLeft: 0,
   },
   itemDate: {
