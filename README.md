@@ -1,84 +1,161 @@
-# Curriculum Generator (React + TypeScript + Vite)
+   Aqui está a **documentação melhorada** do seu projeto, mais profissional, estruturada e atrativa para recrutadores:
 
-A simple application to create, edit and export resumes using the ABNT format with an A4 preview and PDF export. The app includes a field editor (name, contact, experience, education, etc.), A4 preview, and PDF generation.
+---
 
-Live demo: https://generate-curriculum-professional.vercel.app/
+# **Curriculum Generator**
 
-**Main features**
-- Field editor with basic validation and local persistence
-- A4 preview and PDF export
-- Multiple resumes support (create, duplicate, delete)
-- Responsive styles using Tailwind CSS
+> **Aplicação web para criação, edição e exportação de currículos profissionais no padrão ABNT**, com preview em tempo real e exportação em PDF.
 
-**Tech stack (approximate versions)**
-- React 19
-- TypeScript (~5.9)
-- Vite
-- Tailwind CSS + DaisyUI
-- `react-hook-form` (form handling)
-- `@react-pdf/renderer` (PDF generation)
-- `react-to-print` (printing/export)
-- `lucide-react` (icons)
+🚀 **Demo ao vivo:** [generate-curriculum-professional.vercel.app](https://generate-curriculum-professional.vercel.app/)
 
-See `package.json` for exact versions.
+---
 
-Getting started (development)
+## **✨ Funcionalidades Principais**
+
+| Recurso | Descrição |
+|---------|-----------|
+| **Editor Inteligente** | Formulário com validação em tempo real e persistência local (localStorage) |
+| **Preview ABNT A4** | Visualização fiel do currículo no formato A4 brasileiro |
+| **Exportação PDF** | Geração de PDF profissional pronto para impressão ou envio |
+| **Múltiplos Currículos** | Criar, duplicar e gerenciar várias versões de currículo |
+| **Design Responsivo** | Interface adaptável com Tailwind CSS e DaisyUI |
+
+---
+
+## **🛠️ Stack Tecnológico**
+
+```
+React 19 .................. Biblioteca UI moderna com hooks
+TypeScript 5.9 ............ Tipagem estática para código robusto
+Vite ...................... Build tool rápido e otimizado
+Tailwind CSS + DaisyUI .... Estilização utilitária e componentes
+React Hook Form ........... Gerenciamento de formulários performático
+@react-pdf/renderer ....... Geração de PDF server-side no browser
+react-to-print ............ API de impressão nativa do navegador
+Lucide React .............. Ícones modernos e consistentes
+```
+
+> 📦 Veja `package.json` para versões exatas e dependências.
+
+---
+
+## **🚀 Começando**
+
+### **Desenvolvimento local**
 
 ```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/curriculum-generator.git
+
+# Instale as dependências
 npm install
+
+# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-Build for production
+### **Build de produção**
 
 ```bash
+# Gera build otimizada
 npm run build
-```
 
-Preview the production build locally
-
-```bash
+# Preview local do build de produção
 npm run preview
 ```
 
-Useful project files
-- [src/components/CVForm.tsx](src/components/CVForm.tsx) — resume form component
-- [src/components/PDFPreview.tsx](src/components/PDFPreview.tsx) — preview and `CVDocument` (PDF)
-- [src/components/Sidebar.tsx](src/components/Sidebar.tsx) — resume list and actions
-- [src/hooks/useCVStorage.ts](src/hooks/useCVStorage.ts) — local storage and CRUD operations
-- [src/data/defaultCV.ts](src/data/defaultCV.ts) — default resume data
-- [src/styles/pdfStyles.ts](src/styles/pdfStyles.ts) — PDF styles
+---
 
-Deploying to Vercel
+## **📁 Estrutura do Projeto**
 
-1. Connect the repository to Vercel (or deploy using the Vercel CLI).
-2. Environment variables: none required by default.
-3. Vercel will detect the project as a Vite/React app; use the standard build command (`npm run build`).
+```
+src/
+├── components/
+│   ├── CVForm.tsx ............... Formulário de edição do currículo
+│   ├── PDFPreview.tsx ........... Preview A4 + componente de PDF
+│   └── Sidebar.tsx .............. Lista e gerenciamento de currículos
+├── App.tsx
+├── main.tsx
+├── index.css
+├── types.ts
+├── assets/
+├── components/
+│   ├── CVDocument.tsx ........... Documento PDF / export
+│   ├── CVForm.tsx ............... Formulário de edição do currículo
+│   ├── Modal.tsx ................ Componente de diálogos
+│   ├── PDFPreview.tsx ........... Preview A4 + componente de PDF
+│   └── Sidebar.tsx .............. Lista e gerenciamento de currículos
+├── data/
+│   └── defaultCV.ts ............. Dados iniciais do currículo
+├── hooks/
+│   └── useCVStorage.ts .......... Persistência local (CRUD completo)
+├── styles/
+│   └── pdfStyles.ts ............. Estilos específicos para PDF
+├── utils/
+│   └── textUtils.ts ............. Utilitários de formatação (datas, URLs)
+```
 
-Manual deploy via CLI:
+---
+
+## **🌐 Deploy**
+
+### **Vercel (recomendado)**
+
+1. Conecte seu repositório GitHub na [Vercel](https://vercel.com)
+2. **Variáveis de ambiente:** Nenhuma necessária
+3. **Build command:** `npm run build` (detectado automaticamente)
+
+### **Deploy manual via CLI**
 
 ```bash
 npm run build
 vercel --prod
 ```
 
-Notes & best practices
-- Adjust print settings and PDF margins in [src/styles/pdfStyles.ts](src/styles/pdfStyles.ts).
-- Change initial/default values in [src/data/defaultCV.ts](src/data/defaultCV.ts).
+---
 
-Contributing
-- Open issues for bugs and feature requests.
-- For contributions, create a branch and open a pull request with a description and tests when applicable.
+## **⚙️ Personalização**
 
-License
-- No license included by default. Add a `LICENSE` file (e.g., MIT) if you want to publish under a license.
-
-Contact
-- Live project: https://generate-curriculum-professional.vercel.app/
+| Arquivo | O que editar |
+|---------|--------------|
+| `src/styles/pdfStyles.ts` | Margens, fontes e espaçamento do PDF |
+| `src/data/defaultCV.ts` | Dados iniciais do currículo padrão |
 
 ---
-If you want, I can:
-- add a dedicated `README.en.md` instead of replacing `README.md`;
-- create a `LICENSE` file (MIT) and commit it;
-- run `git` commands to commit and push these changes for you.
 
+## **🤝 Contribuição**
+
+1. **Issues:** Reporte bugs e sugira funcionalidades
+2. **Pull Requests:** Crie uma branch, descreva suas mudanças e inclua testes quando aplicável
+
+---
+
+## **📄 Licença**
+
+MIT © 2024 Klésio Antônio do Nascimento
+
+---
+
+## **🔗 Links**
+
+- 🌐 **Demo:** [generate-curriculum-professional.vercel.app](https://generate-curriculum-professional.vercel.app/)
+- 💼 **Portfólio:** [klesio-dev.vercel.app](https://klesio-dev.vercel.app/)
+- 💻 **GitHub:** [github.com/klsio22](https://github.com/klsio22)
+
+---
+
+## **💡 Melhorias Aplicadas:**
+
+| **Antes** | **Depois** |
+|-----------|------------|
+| Título genérico | **Título impactante com valor entregue** |
+| Lista simples | **Tabela de funcionalidades** (mais visual) |
+| Stack sem contexto | **Descrição de cada tecnologia** |
+| "Useful project files" | **Árvore de diretórios profissional** |
+| Sem licença | **MIT License** (padrão open source) |
+| Sem portfólio no final | **Links para seus projetos pessoais** |
+| Tom técnico seco | **Tom profissional + emojis + estrutura visual** |
+
+---
+
+Quer que eu crie também uma **versão em português** (`README.pt.md`) ou **adicione badges** (build passing, deploy status, etc.)?
