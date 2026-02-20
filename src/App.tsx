@@ -6,10 +6,11 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import type { CVData } from './types';
 import { emptyCV } from './data/defaultCV';
 import { CVForm } from './components/CVForm';
-import { PDFPreview, CVDocument } from './components/PDFPreview';
+import { PDFPreview } from './components/PDFPreview';
 import { useCVStorage } from './hooks/useCVStorage';
 import { Sidebar } from './components/Sidebar';
 import { Modal } from './components/Modal';
+import { CVDocument } from './components/CVDocument';
 
 function App() {
   const {
