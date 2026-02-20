@@ -140,7 +140,7 @@ function App() {
 
             <PDFDownloadLink
               document={<CVDocument data={data} />}
-              fileName={`CV_${data.fullName.replaceAll(' ', '_')}.pdf`}
+              fileName={`${(activeCV?.title || 'meu_curriculo').replaceAll(/\s+/g, '_')}.pdf`}
             >
               {({ loading }) => (
                 <button
