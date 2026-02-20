@@ -90,6 +90,13 @@ export const pdfStyles = StyleSheet.create({
   sectionContent: {
     marginBottom: 8,
   },
+  sectionBody: {
+    marginLeft: 8,
+    marginTop: 4,
+  },
+  itemContent: {
+    marginLeft: 0,
+  },
   itemContainer: {
     marginBottom: 8,
   },
@@ -117,7 +124,7 @@ export const pdfStyles = StyleSheet.create({
     marginBottom: 6,
   },
   bulletList: {
-    marginLeft: 10,
+    marginLeft: 8,
   },
   bulletItem: {
     fontSize: 9,

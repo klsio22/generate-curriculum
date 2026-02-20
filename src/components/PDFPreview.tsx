@@ -123,7 +123,9 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
           {data.objective && (
             <View style={styles.sectionContent}>
               <Text style={styles.sectionTitle}>PERFIL</Text>
-              <Text style={styles.objective}>{data.objective}</Text>
+              <View style={styles.sectionBody}>
+                <Text style={styles.objective}>{data.objective}</Text>
+              </View>
             </View>
           )}
 
@@ -137,16 +139,18 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
                   style={styles.itemContainer}
                 >
                   <Text style={styles.itemTitle}>{exp.role}</Text>
-                  <Text style={styles.itemSubtitle}>{exp.company}</Text>
-                  <Text style={styles.itemDate}>
-                    {formatDate(exp.startDate)}
-                    {exp.endDate ? ` - ${formatDate(exp.endDate)}` : ' - Atual'}
-                  </Text>
-                  {exp.description && (
-                    <View style={styles.bulletList}>
-                      {renderDescription(exp.description, `${exp.company}-${exp.role}`)}
-                    </View>
-                  )}
+                  <View style={styles.itemContent}>
+                    <Text style={styles.itemSubtitle}>{exp.company}</Text>
+                    <Text style={styles.itemDate}>
+                      {formatDate(exp.startDate)}
+                      {exp.endDate ? ` - ${formatDate(exp.endDate)}` : ' - Atual'}
+                    </Text>
+                    {exp.description && (
+                      <View style={styles.bulletList}>
+                        {renderDescription(exp.description, `${exp.company}-${exp.role}`)}
+                      </View>
+                    )}
+                  </View>
                 </View>
               ))}
             </View>
@@ -162,22 +166,24 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
                   style={styles.itemContainer}
                 >
                   <Text style={styles.itemTitle}>{edu.institution}</Text>
-                  <Text style={styles.itemSubtitle}>{edu.course}</Text>
-                  {(edu.startDate || edu.endDate) && (
-                    <Text style={styles.itemDate}>
-                      {formatDate(edu.startDate)}
-                      {edu.endDate ? ` - ${formatDate(edu.endDate)}` : ''}
-                    </Text>
-                  )}
-                  {edu.topics && (
-                    <Text style={styles.bulletItem}>
-                      {edu.topics
-                        .split('\n')
-                        .map((t) => t.trim())
-                        .filter(Boolean)
-                        .join(', ')}
-                    </Text>
-                  )}
+                  <View style={styles.itemContent}>
+                    <Text style={styles.itemSubtitle}>{edu.course}</Text>
+                    {(edu.startDate || edu.endDate) && (
+                      <Text style={styles.itemDate}>
+                        {formatDate(edu.startDate)}
+                        {edu.endDate ? ` - ${formatDate(edu.endDate)}` : ''}
+                      </Text>
+                    )}
+                    {edu.topics && (
+                      <Text style={styles.bulletItem}>
+                        {edu.topics
+                          .split('\n')
+                          .map((t) => t.trim())
+                          .filter(Boolean)
+                          .join(', ')}
+                      </Text>
+                    )}
+                  </View>
                 </View>
               ))}
             </View>
@@ -187,11 +193,13 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
           {skillsList.length > 0 && (
             <View style={styles.sectionContent}>
               <Text style={styles.sectionTitle}>COMPETÊNCIAS TÉCNICAS</Text>
-              {skillsList.map((skill) => (
-                <Text key={skill} style={styles.bulletItem}>
-                  {skill.trim().replace(/^•\s*/, '')}
-                </Text>
-              ))}
+              <View style={styles.sectionBody}>
+                {skillsList.map((skill) => (
+                  <Text key={skill} style={styles.bulletItem}>
+                    {skill.trim().replace(/^•\s*/, '')}
+                  </Text>
+                ))}
+              </View>
             </View>
           )}
 
@@ -205,23 +213,25 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
                   style={styles.itemContainer}
                 >
                   <Text style={styles.itemTitle}>{project.name}</Text>
-                  {project.technologies && (
-                    <Text style={styles.itemSubtitle}>{project.technologies}</Text>
-                  )}
-                  {(project.startDate || project.endDate) && (
-                    <Text style={styles.itemDate}>
-                      {formatDate(project.startDate)}
-                      {project.endDate ? ` - ${formatDate(project.endDate)}` : ''}
-                    </Text>
-                  )}
-                  {project.description && (
-                    <Text style={styles.objective}>{project.description}</Text>
-                  )}
-                  {project.link && (
-                    <Text style={styles.bulletItem}>
-                      Link: {project.link}
-                    </Text>
-                  )}
+                  <View style={styles.itemContent}>
+                    {project.technologies && (
+                      <Text style={styles.itemSubtitle}>{project.technologies}</Text>
+                    )}
+                    {(project.startDate || project.endDate) && (
+                      <Text style={styles.itemDate}>
+                        {formatDate(project.startDate)}
+                        {project.endDate ? ` - ${formatDate(project.endDate)}` : ''}
+                      </Text>
+                    )}
+                    {project.description && (
+                      <Text style={styles.objective}>{project.description}</Text>
+                    )}
+                    {project.link && (
+                      <Text style={styles.bulletItem}>
+                        Link: {project.link}
+                      </Text>
+                    )}
+                  </View>
                 </View>
               ))}
             </View>
@@ -231,8 +241,10 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
             {data.academicProjects && (
               <View style={styles.sectionContent}>
                 <Text style={styles.sectionTitle}>PROJETOS ACADÊMICOS E TÉCNICOS</Text>
-                <View style={styles.bulletList}>
-                  {renderDescription(data.academicProjects, 'academic')}
+                <View style={styles.sectionBody}>
+                  <View style={styles.bulletList}>
+                    {renderDescription(data.academicProjects, 'academic')}
+                  </View>
                 </View>
               </View>
             )}
@@ -241,11 +253,13 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
           {langsList.length > 0 && (
             <View style={styles.sectionContent}>
               <Text style={styles.sectionTitle}>IDIOMAS</Text>
-              {langsList.map((lang) => (
-                <Text key={lang} style={styles.bulletItem}>
-                  {lang.trim()}
-                </Text>
-              ))}
+              <View style={styles.sectionBody}>
+                {langsList.map((lang) => (
+                  <Text key={lang} style={styles.bulletItem}>
+                    {lang.trim()}
+                  </Text>
+                ))}
+              </View>
             </View>
           )}
 
@@ -253,11 +267,13 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
           {softList.length > 0 && (
             <View style={styles.sectionContent}>
               <Text style={styles.sectionTitle}>SOFT SKILLS</Text>
-              {softList.map((s) => (
-                <Text key={s} style={styles.bulletItem}>
-                  {s.trim()}
-                </Text>
-              ))}
+              <View style={styles.sectionBody}>
+                {softList.map((s) => (
+                  <Text key={s} style={styles.bulletItem}>
+                    {s.trim()}
+                  </Text>
+                ))}
+              </View>
             </View>
           )}
 
@@ -265,8 +281,10 @@ const CVDocument: React.FC<PDFPreviewProps> = ({ data }) => {
           {data.interpersonalSkills && (
             <View style={styles.sectionContent}>
               <Text style={styles.sectionTitle}>COMPETÊNCIAS INTERPESSOAIS DEMONSTRADAS</Text>
-              <View style={styles.bulletList}>
-                {renderDescription(data.interpersonalSkills, 'interpersonal')}
+              <View style={styles.sectionBody}>
+                <View style={styles.bulletList}>
+                  {renderDescription(data.interpersonalSkills, 'interpersonal')}
+                </View>
               </View>
             </View>
           )}
