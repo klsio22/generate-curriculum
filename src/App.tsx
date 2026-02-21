@@ -132,28 +132,31 @@ function App() {
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         <header className="bg-white shadow p-4 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <h1 className="text-xl md:text-2xl font-bold text-gray-800 truncate">
+              <div className="flex items-center gap-3">
+              <h1 className="m-auto text-lg md:text-2xl font-bold text-gray-800 truncate">
                 Gerador de Currículo ABNT
               </h1>
             </div>
 
-            <PDFDownloadLink
-              document={<CVDocument data={data} />}
-              fileName={`${(activeCV?.title || 'meu_curriculo').replaceAll(/\s+/g, '_')}.pdf`}
-            >
-              {({ loading }) => (
-                <button
-                  disabled={loading}
-                  onClick={() => reactToPrintFn()}
-                  className="flex items-center gap-2 bg-indigo-600 text-white px-3 py-2 md:px-4 md:py-2 rounded-md hover:bg-indigo-700 transition text-sm md:text-base whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Printer size={20} />
-                  <span className="hidden md:inline">Baixar Currículo</span>
-                  <span className="md:hidden">PDF</span>
-                </button>
-              )}
-            </PDFDownloadLink>
+            {/* Desktop / md+: show download in header; Mobile: hidden */}
+            <div className="hidden md:block">
+              <PDFDownloadLink
+                document={<CVDocument data={data} />}
+                fileName={`${(activeCV?.title || 'meu_curriculo').replaceAll(/\s+/g, '_')}.pdf`}
+              >
+                {({ loading }) => (
+                  <button
+                    disabled={loading}
+                    onClick={() => reactToPrintFn()}
+                    className="flex items-center gap-2 bg-indigo-600 text-white px-3 py-2 md:px-4 md:py-2 rounded-md hover:bg-indigo-700 transition text-sm md:text-base whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Printer size={20} />
+                    <span className="hidden md:inline">Baixar Currículo</span>
+                    <span className="md:hidden">PDF</span>
+                  </button>
+                )}
+              </PDFDownloadLink>
+            </div>
           </div>
         </header>
 
@@ -196,9 +199,29 @@ function App() {
             {/* Preview Column */}
             <div className="space-y-6 lg:sticky lg:top-24">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold text-gray-700">
-                  Visualização
-                </h2>
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-700">
+                    Visualização
+                  </h2>
+                  {/* Mobile: show download button below the title */}
+                  <div className="mt-2 md:hidden">
+                    <PDFDownloadLink
+                      document={<CVDocument data={data} />}
+                      fileName={`${(activeCV?.title || 'meu_curriculo').replace(/\s+/g, '_')}.pdf`}
+                    >
+                      {({ loading }) => (
+                        <button
+                          disabled={loading}
+                          onClick={() => reactToPrintFn()}
+                          className="flex items-center gap-2 bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-700 transition text-sm whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <Printer size={18} />
+                          <span>Baixar</span>
+                        </button>
+                      )}
+                    </PDFDownloadLink>
+                  </div>
+                </div>
                 <span className="text-sm text-gray-500 bg-gray-200 px-2 py-1 rounded">
                   A4 Preview
                 </span>
