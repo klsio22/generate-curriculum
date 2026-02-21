@@ -196,7 +196,7 @@ function App() {
 
             {/* Preview Column */}
             <div className="space-y-6 lg:sticky lg:top-24">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-baseline">
                 <div>
                   <h2 className="text-xl font-semibold text-gray-700">
                     Visualização
