@@ -137,5 +137,3 @@ MIT © 2024 Klésio Antônio do Nascimento
 - 🌐 **Demo:** [generate-curriculum-professional.vercel.app](https://generate-curriculum-professional.vercel.app/)
 - 💼 **Portfólio:** [klesio-dev.vercel.app](https://klesio-dev.vercel.app/)
 - 💻 **GitHub:** [github.com/klsio22](https://github.com/klsio22)
-
----
