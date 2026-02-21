@@ -48,7 +48,6 @@ function App() {
 
   const data = useWatch({ control }) as CVData;
 
-  // Save only on explicit UI events (blur / keyup) triggered from the form.
   const handleSave = () => {
     if (skipSaveRef.current) return;
     if (!activeId || !data) return;
@@ -57,7 +56,6 @@ function App() {
     updateCV(activeId, current);
   };
 
-  // Sidebar requests
   const handleRequestDelete = (id: string) => {
     setPendingDeleteId(id);
     setShowDeleteModal(true);
