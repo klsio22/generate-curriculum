@@ -21,7 +21,8 @@ export const defaultCV: CVData = {
       institution: 'Universidade de Monte Verde',
       startDate: 'Maio de 2030',
       endDate: 'Maio de 2032',
-      topics: 'Deep Learning\nNatural Language Processing\nAdvanced Operating Systems\nDistributed Computing\nComputer Networks',
+      topics:
+        'Deep Learning\nNatural Language Processing\nAdvanced Operating Systems\nDistributed Computing\nComputer Networks',
     },
     {
       id: '2',
@@ -29,7 +30,8 @@ export const defaultCV: CVData = {
       institution: 'Universidade de Monte Verde',
       startDate: 'Jun 2026',
       endDate: 'Jun 2030',
-      topics: 'Applied Mathematics\nDiscrete Mathematics\nAlgorithms\nDatabases\nMachine Learning\nArtificial Intelligence\nNatural Language Processing\nCloud Computing\nDistributed Computing',
+      topics:
+        'Applied Mathematics\nDiscrete Mathematics\nAlgorithms\nDatabases\nMachine Learning\nArtificial Intelligence\nNatural Language Processing\nCloud Computing\nDistributed Computing',
     },
   ],
   experience: [
@@ -54,26 +56,27 @@ export const defaultCV: CVData = {
   ],
   skills:
     'Análise de Sistemas\nPesquisa de Usuários\nMachine Learning\nMetodologia Ágil\nBanco de Dados',
-  languages: '',
+  languages: 'Inglês: B1 (Intermediário avançado) - Leitura técnica fluente, participação em code reviews internacionais',
   softSkills: '',
-  interpersonalSkills: `Liderança e Mentoria: Conduzo revisões de código detalhadas e sessões de pair programming, reduzindo tempo de onboarding de novos desenvolvedores em 50%. Assumo naturalmente papel de referência técnica, propondo soluções para problemas complexos e educando a equipe sobre trade-offs técnicos.
-Comunicação e Colaboração: Facilito comunicação efetiva entre equipes técnicas e não-técnicas, traduzindo requisitos de negócio em soluções técnicas viáveis. Demonstro empatia ao entender perspectivas de designers, PMs e stakeholders, criando consenso através de apresentações claras e negociação construtiva.
-Resolução de Problemas: Aplico pensamento analítico sistemático para diagnosticar problemas complexos, como evidenciado pela resolução de bug crítico de race condition que salvou dados de clientes e pela otimização de performance que aumentou conversões em 25%.
-Autonomia e Proatividade: Identifico oportunidades de melhoria sem ser solicitado, como criação de biblioteca de componentes que reduziu tempo de desenvolvimento em 60% e documentação técnica que diminuiu code reviews em 50%.
-Resiliência e Aprendizado: Enfrento desafios técnicos complexos com persistência, dedicando tempo para dominar código legado difícil e transformá-lo em solução moderna e manutenível, enquanto documento o processo para benefício da equipe.
-Gestão de Tempo e Organização: Entrego projetos consistentemente no prazo através de planejamento cuidadoso, priorização efetiva e comunicação proativa sobre riscos e impedimentos.
-Adaptabilidade: Domino novas tecnologias e plataformas rapidamente (ex: VTEX em 3 semanas), adapto-me a mudanças de requisitos com flexibilidade e mantenho produtividade em ambientes dinâmicos de startup.`,
   academicProjects: `Projetos em Python | UTFPR
-2022 - Presente
-Desenvolvi diversos projetos acadêmicos utilizando Python, aplicando conceitos de programação orientada a objetos, estruturas de dados, algoritmos e desenvolvimento backend. Implementei sistemas de gerenciamento de dados com manipulação de arquivos, validações e lógica de negócio complexa. Trabalhei com bibliotecas Python para processamento de dados e automação de tarefas. Apliquei conceitos de POO (Programação Orientada a Objetos) criando classes, herança, polimorfismo e encapsulamento em projetos práticos. Desenvolvi APIs RESTful utilizando conceitos de arquitetura backend e integração com bancos de dados relacionais e NoSQL.
-Conhecimento em Cloud Computing (AWS)
-Conhecimento teórico em serviços AWS incluindo EC2 (Elastic Compute Cloud) para provisionamento de servidores virtuais, S3 (Simple Storage Service) para armazenamento de objetos, Lambda para computação serverless, RDS (Relational Database Service) para bancos de dados gerenciados, e conceitos de arquitetura cloud, escalabilidade, alta disponibilidade e segurança em ambientes distribuídos.`,
+    2022 - Presente
+    Desenvolvi diversos projetos acadêmicos utilizando Python, aplicando conceitos de programação orientada a objetos, estruturas de dados, algoritmos e desenvolvimento backend. Implementei sistemas de gerenciamento de dados com manipulação de arquivos, validações e lógica de negócio complexa. Trabalhei com bibliotecas Python para processamento de dados e automação de tarefas. Apliquei conceitos de POO (Programação Orientada a Objetos) criando classes, herança, polimorfismo e encapsulamento em projetos práticos. Desenvolvi APIs RESTful utilizando conceitos de arquitetura backend e integração com bancos de dados relacionais e NoSQL.
+    Conhecimento em Cloud Computing (AWS)
+    Conhecimento teórico em serviços AWS incluindo EC2 (Elastic Compute Cloud) para provisionamento de servidores virtuais, S3 (Simple Storage Service) para armazenamento de objetos, Lambda para computação serverless, RDS (Relational Database Service) para bancos de dados gerenciados, e conceitos de arquitetura cloud, escalabilidade, alta disponibilidade e segurança em ambientes distribuídos.`,
+  interpersonalSkills: `Liderança e Mentoria: Conduzo revisões de código detalhadas e sessões de pair programming, reduzindo tempo de onboarding de novos desenvolvedores em 50%. Assumo naturalmente papel de referência técnica, propondo soluções para problemas complexos e educando a equipe sobre trade-offs técnicos.
+  Comunicação e Colaboração: Facilito comunicação efetiva entre equipes técnicas e não-técnicas, traduzindo requisitos de negócio em soluções técnicas viáveis. Demonstro empatia ao entender perspectivas de designers, PMs e stakeholders, criando consenso através de apresentações claras e negociação construtiva.
+  Resolução de Problemas: Aplico pensamento analítico sistemático para diagnosticar problemas complexos, como evidenciado pela resolução de bug crítico de race condition que salvou dados de clientes e pela otimização de performance que aumentou conversões em 25%.
+  Autonomia e Proatividade: Identifico oportunidades de melhoria sem ser solicitado, como criação de biblioteca de componentes que reduziu tempo de desenvolvimento em 60% e documentação técnica que diminuiu code reviews em 50%.
+  Resiliência e Aprendizado: Enfrento desafios técnicos complexos com persistência, dedicando tempo para dominar código legado difícil e transformá-lo em solução moderna e manutenível, enquanto documento o processo para benefício da equipe.
+  Gestão de Tempo e Organização: Entrego projetos consistentemente no prazo através de planejamento cuidadoso, priorização efetiva e comunicação proativa sobre riscos e impedimentos.`,
+
   customFields: [],
   projects: [
     {
       id: '1',
       name: 'Sistema de Gestão Hospitalar',
-      description: 'Desenvolvimento de sistema web completo para gestão de pacientes, agendamentos e registros médicos. Implementei a arquitetura backend com Java Spring Boot e frontend com React.',
+      description:
+        'Desenvolvimento de sistema web completo para gestão de pacientes, agendamentos e registros médicos. Implementei a arquitetura backend com Java Spring Boot e frontend com React.',
       technologies: 'Java, Spring Boot, React, PostgreSQL',
       link: 'github.com/usuario/hospital-system',
       startDate: 'Jan 2032',
@@ -82,19 +85,12 @@ Conhecimento teórico em serviços AWS incluindo EC2 (Elastic Compute Cloud) par
     {
       id: '2',
       name: 'App Mobile de Finanças Pessoais',
-      description: 'Aplicativo mobile para controle de despesas e orçamento pessoal com gráficos de análise. Participei como desenvolvedora principal na implementação das funcionalidades de dashboard e relatórios.',
+      description:
+        'Aplicativo mobile para controle de despesas e orçamento pessoal com gráficos de análise. Participei como desenvolvedora principal na implementação das funcionalidades de dashboard e relatórios.',
       technologies: 'React Native, Firebase, Expo',
       link: 'github.com/usuario/finance-app',
       startDate: 'Mar 2031',
       endDate: 'Jul 2031',
-    },
-  ],
-  references: [
-    {
-      id: '1',
-      name: 'Amanda Tomika',
-      email: 'ola@grandesite.com.br',
-      phone: '(12) 456-7890',
     },
   ],
 };
