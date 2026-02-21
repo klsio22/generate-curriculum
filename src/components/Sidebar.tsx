@@ -128,7 +128,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     }
                   />
                   <div className="flex flex-col truncate">
-                    <span className="font-medium text-sm wrap-break-word whitespace-normal">
+                    <span className="font-medium text-sm wrap-break-word whitespace-normal mr-16">
                       {cv.title}
                     </span>
                     <span className="text-xs text-gray-500">
@@ -142,7 +142,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       e.stopPropagation();
                       onDuplicate(cv.id);
                     }}
-                    className="text-gray-500 hover:text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity p-1 mr-2"
+                    className="text-gray-500 hover:text-indigo-400 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity p-1 mr-2"
                     title="Duplicar"
                   >
                     <Copy size={16} />
@@ -153,7 +153,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       e.stopPropagation();
                       onRequestDelete(cv.id);
                     }}
-                    className="text-gray-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1"
+                    className="text-gray-500 hover:text-red-500 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity p-1"
                     title="Excluir"
                   >
                     <Trash2 size={16} />
