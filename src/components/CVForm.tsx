@@ -16,7 +16,6 @@ interface CVFormProps {
   onSave?: () => void;
 }
 
-// Helper for section header
 const SectionHeader = ({ title }: { title: string }) => (
   <h3 className="text-lg font-semibold text-gray-700 mt-6 mb-3 border-b pb-1">
     {title}
@@ -189,7 +188,7 @@ export const CVForm: React.FC<CVFormProps> = ({
           id="objective"
           {...reg('objective')}
           rows={6}
-          className="mt-1 block w-full h-52 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+          className="mt-1 block w-full h-44 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Descreva seu objetivo profissional..."
         />
       </div>
