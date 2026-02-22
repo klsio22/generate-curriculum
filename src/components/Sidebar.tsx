@@ -56,7 +56,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <button
           onClick={toggleSidebar}
           aria-label="Abrir sidebar"
-          className="fixed left-0 top-6 z-40 bg-gray-900 text-white p-2 rounded-r-md shadow-md"
+          className="fixed left-0 top-28 lg:top-6 z-40 bg-gray-900 text-white p-2 rounded-r-md shadow-md"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512" className="fill-current">
             <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />

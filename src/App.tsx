@@ -132,14 +132,13 @@ function App() {
 
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         <header className="bg-white shadow p-4 sticky top-0 z-10">
-          <div className="max-w-7xl mx-auto flex justify-between items-center gap-4">
-              <div className="m-auto flex items-center gap-3">
-              <h1 className=" text-lg md:text-2xl font-bold text-gray-800 truncate">
+          <div className="max-w-7xl mx-auto flex justify-between items-center gap-2 md:gap-4">
+            <div className="flex items-center gap-2 md:gap-3 min-w-0">
+              <h1 className="text-lg md:text-2xl font-bold text-gray-800 truncate">
                 {t('header.title')}
               </h1>
+              <LanguageSelector />
             </div>
-
-            <LanguageSelector />
 
             {/* Desktop / md+: show download in header; Mobile: hidden */}
             <div className="hidden md:block">
