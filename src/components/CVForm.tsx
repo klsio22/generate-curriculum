@@ -60,14 +60,7 @@ export const CVForm: React.FC<CVFormProps> = ({
     name: 'references',
   });
 
-  const {
-    fields: customFields,
-    append: appendCustom,
-    remove: removeCustom,
-  } = useFieldArray({
-    control,
-    name: 'customFields',
-  });
+  
 
   const {
     fields: projectFields,
@@ -195,8 +188,8 @@ export const CVForm: React.FC<CVFormProps> = ({
         <textarea
           id="objective"
           {...reg('objective')}
-          rows={3}
-          className="mt-1 block w-full h-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+          rows={6}
+          className="mt-1 block w-full h-52 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Descreva seu objetivo profissional..."
         />
       </div>
@@ -256,8 +249,8 @@ export const CVForm: React.FC<CVFormProps> = ({
               <textarea
                 id={`experience-${index}-description`}
                 {...reg((`experience.${index}.description`) as Path<CVData>)}
-                rows={3}
-                className="mt-1 block w-full h-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+                rows={6}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
           </div>
@@ -338,8 +331,8 @@ export const CVForm: React.FC<CVFormProps> = ({
                 id={`education-${index}-topics`}
                 {...reg((`education.${index}.topics`) as Path<CVData>)}
                 placeholder={"Ex: Deep Learning\nNatural Language Processing\nAdvanced Operating Systems"}
-                rows={3}
-                className="mt-1 block w-full h-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+                rows={6}
+                className="mt-1 block w-full h-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
           </div>
@@ -433,8 +426,8 @@ export const CVForm: React.FC<CVFormProps> = ({
                 id={`projects-${index}-description`}
                 {...reg((`projects.${index}.description`) as Path<CVData>)}
                 placeholder="Descreva o projeto, suas funcionalidades e sua contribuição..."
-                rows={3}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+                rows={8}
+                className="mt-1 block w-full h-52 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
               />
             </div>
           </div>
@@ -467,8 +460,8 @@ export const CVForm: React.FC<CVFormProps> = ({
         <textarea
           id="skills"
           {...reg('skills')}
-          rows={4}
-          className="mt-1 block w-full h-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
+          rows={8}
+          className="mt-1 block w-full h-52 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Liste suas principais habilidades (uma por linha)..."
         />
       </div>
@@ -479,7 +472,7 @@ export const CVForm: React.FC<CVFormProps> = ({
         <textarea
           id="languages"
           {...reg('languages')}
-          rows={3}
+          rows={8}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Ex: Português (Nativo)\nInglês (Avançado)..."
         />
@@ -491,7 +484,7 @@ export const CVForm: React.FC<CVFormProps> = ({
         <textarea
           id="softSkills"
           {...reg('softSkills')}
-          rows={3}
+          rows={6}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Ex: Comunicação, Trabalho em equipe..."
         />
@@ -503,57 +496,13 @@ export const CVForm: React.FC<CVFormProps> = ({
         <textarea
           id="interpersonalSkills"
           {...reg('interpersonalSkills')}
-          rows={6}
+          rows={10}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
           placeholder="Descreva competências interpessoais demonstradas (um parágrafo ou tópicos por linha)..."
         />
       </div>
 
-      <SectionHeader title="Campos Personalizados" />
-      {customFields.map((field, index) => (
-        <div key={field.id} className="bg-gray-50 p-4 rounded-md mb-3 border relative">
-          <button
-            type="button"
-            onClick={() => {
-              removeCustom(index);
-              setTimeout(() => callSave(), 0);
-            }}
-            className="absolute top-2 right-2 text-red-500 hover:text-red-700"
-          >
-            <Trash2 size={18} />
-          </button>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor={`customFields-${index}-label`} className="block text-sm font-medium text-gray-700">Rótulo</label>
-              <input
-                id={`customFields-${index}-label`}
-                {...reg((`customFields.${index}.label`) as Path<CVData>)}
-                placeholder="Ex: Certificações"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
-              />
-            </div>
-            <div>
-              <label htmlFor={`customFields-${index}-value`} className="block text-sm font-medium text-gray-700">Valor</label>
-              <input
-                id={`customFields-${index}-value`}
-                {...reg((`customFields.${index}.value`) as Path<CVData>)}
-                placeholder="Conteúdo do campo"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
-              />
-            </div>
-          </div>
-        </div>
-      ))}
-      <button
-        type="button"
-        onClick={() => {
-          appendCustom({ id: '', label: '', value: '' });
-          setTimeout(() => callSave(), 0);
-        }}
-        className="flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
-      >
-        <Plus size={18} className="mr-1" /> Adicionar Campo
-      </button>
+      
 
       <SectionHeader title="Referências" />
       {refFields.map((field, index) => (

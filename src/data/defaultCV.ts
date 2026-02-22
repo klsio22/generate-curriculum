@@ -65,7 +65,7 @@ export const defaultCV: CVData = {
   Resiliência e Aprendizado: Enfrento desafios técnicos complexos com persistência, dedicando tempo para dominar código legado difícil e transformá-lo em solução moderna e manutenível, enquanto documento o processo para benefício da equipe.
   Gestão de Tempo e Organização: Entrego projetos consistentemente no prazo através de planejamento cuidadoso, priorização efetiva e comunicação proativa sobre riscos e impedimentos.`,
 
-  customFields: [],
+  
   projects: [
     {
       id: '1',
