@@ -7,6 +7,7 @@ import {
     Svg,
     Path,
 } from '@react-pdf/renderer';
+import { useTranslation } from 'react-i18next';
 import styles from '../styles/pdfStyles';
 import type { CVData } from '../types';
 import { formatDate, normalizeUrl } from '../utils/textUtils';
@@ -17,6 +18,7 @@ export interface PDFPreviewProps {
 }
 
 export const CVDocument = ({ data }: PDFPreviewProps) => {
+    const { t } = useTranslation();
     const skillsList =
         data.skills
             ?.split('\n')
@@ -132,7 +134,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* Objective */}
                     {data.objective && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>PERFIL</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.profile')}</Text>
                             <Text style={styles.objective}>{data.objective}</Text>
                         </View>
                     )}
@@ -140,7 +142,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* Experience */}
                     {data.experience && data.experience.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>EXPERIÊNCIA PROFISSIONAL</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.experience')}</Text>
                             {data.experience.map((exp) => (
                                 <View
                                     key={`${exp.company}-${exp.role}`}
@@ -165,7 +167,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* Education */}
                     {data.education && data.education.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>FORMAÇÃO ACADÊMICA</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.education')}</Text>
                             {data.education.map((edu) => (
                                 <View
                                     key={`${edu.institution}-${edu.course}`}
@@ -197,7 +199,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* Projects (Academic & Technical consolidated) */}
                     {data.projects && data.projects.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>PROJETOS ACADÊMICOS E TÉCNICOS</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.projects')}</Text>
                             {data.projects.map((project) => (
                                 <View
                                     key={`${project.name}-${project.id}`}
@@ -220,7 +222,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                                     )}
                                     {project.link && (
                                         <Text style={styles.bodyText}>
-                                            Link: {project.link}
+                                            {t('pdf.linkLabel')}: {project.link}
                                         </Text>
                                     )}
                                 </View>
@@ -231,7 +233,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* All Skills */}
                     {skillsList.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>COMPETÊNCIAS TÉCNICAS</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.skills')}</Text>
                             {skillsList.map((skill) => (
                                 <Text key={skill} style={styles.bodyText}>
                                     {skill.trim().replace(/^•\s*/, '')}
@@ -243,7 +245,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* Languages */}
                     {langsList.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>IDIOMAS</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.languages')}</Text>
                             {langsList.map((lang) => (
                                 <Text key={lang} style={styles.bodyText}>
                                     {lang.trim()}
@@ -255,7 +257,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* Soft Skills */}
                     {softList.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>SOFT SKILLS</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.softSkills')}</Text>
                             {softList.map((s) => (
                                 <Text key={s} style={styles.bodyText}>
                                     {s.trim()}
@@ -267,7 +269,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* Interpersonal Competencies Demonstrated */}
                     {data.interpersonalSkills && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>COMPETÊNCIAS INTERPESSOAIS DEMONSTRADAS</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.interpersonalSkills')}</Text>
                             <View style={styles.bulletList}>
                                 {renderDescription(data.interpersonalSkills, 'interpersonal')}
                             </View>
@@ -277,7 +279,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     {/* References */}
                     {data.references && data.references.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>REFERÊNCIAS</Text>
+                            <Text style={styles.sectionTitle}>{t('pdf.references')}</Text>
                             {data.references.map((ref) => (
                                 <View
                                     key={`${ref.name}-${ref.email || ref.phone}`}
