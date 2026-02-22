@@ -27,20 +27,20 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
 
     const renderDescription = (descriptionText?: string, elementKeyPrefix = ''): ReactNode => {
         if (!descriptionText) return null;
-        
+
         const descriptionLines = descriptionText.split('\n');
         const renderedElements: ReactNode[] = [];
         let isInsideSubheading = false;
-        
+
         descriptionLines.forEach((line, lineIndex) => {
             const trimmedLineText = line.trim();
-            
+
             // Skip empty lines and reset subheading context
             if (!trimmedLineText) {
                 isInsideSubheading = false;
                 return;
             }
-            
+
             // Line ending with ':' is treated as a subheading
             if (trimmedLineText.endsWith(':')) {
                 renderedElements.push(
@@ -49,7 +49,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                     </Text>
                 );
                 isInsideSubheading = true;
-            } 
+            }
             // Lines after a subheading are indented as bullet items
             else if (isInsideSubheading) {
                 renderedElements.push(
@@ -57,7 +57,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                         {trimmedLineText}
                     </Text>
                 );
-            } 
+            }
             // Regular lines (without preceding subheading)
             else {
                 renderedElements.push(
@@ -67,7 +67,7 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                 );
             }
         });
-        
+
         return renderedElements;
     };
 
@@ -193,22 +193,11 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                         </View>
                     )}
 
-                    {/* All Skills */}
-                    {skillsList.length > 0 && (
-                        <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>COMPETÊNCIAS TÉCNICAS</Text>
-                            {skillsList.map((skill) => (
-                                <Text key={skill} style={styles.bodyText}>
-                                    {skill.trim().replace(/^•\s*/, '')}
-                                </Text>
-                            ))}
-                        </View>
-                    )}
-
-                    {/* Academic / Technical Projects */}
+                    
+                    {/* Projects (Academic & Technical consolidated) */}
                     {data.projects && data.projects.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>PROJETOS ACADÊMICOS</Text>
+                            <Text style={styles.sectionTitle}>PROJETOS ACADÊMICOS E TÉCNICOS</Text>
                             {data.projects.map((project) => (
                                 <View
                                     key={`${project.name}-${project.id}`}
@@ -225,7 +214,9 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                                         </Text>
                                     )}
                                     {project.description && (
-                                        <Text style={styles.objective}>{project.description}</Text>
+                                        <View style={styles.bulletList}>
+                                            {renderDescription(project.description, `project-${project.id || project.name}`)}
+                                        </View>
                                     )}
                                     {project.link && (
                                         <Text style={styles.bodyText}>
@@ -237,21 +228,17 @@ export const CVDocument = ({ data }: PDFPreviewProps) => {
                         </View>
                     )}
 
-
-
-                    {/* Projects technical */}
-                    {data.academicProjects && (
+                    {/* All Skills */}
+                    {skillsList.length > 0 && (
                         <View style={styles.sectionContent}>
-                            <Text style={styles.sectionTitle}>PROJETOS TÉCNICOS</Text>
-                            <View style={styles.sectionBody}>
-                                <View style={styles.bulletList}>
-                                    {renderDescription(data.academicProjects, 'academic')}
-                                </View>
-                            </View>
+                            <Text style={styles.sectionTitle}>COMPETÊNCIAS TÉCNICAS</Text>
+                            {skillsList.map((skill) => (
+                                <Text key={skill} style={styles.bodyText}>
+                                    {skill.trim().replace(/^•\s*/, '')}
+                                </Text>
+                            ))}
                         </View>
                     )}
-
-
 
                     {/* Languages */}
                     {langsList.length > 0 && (

@@ -363,7 +363,9 @@ export const CVForm: React.FC<CVFormProps> = ({
         <Plus size={18} className="mr-1" /> Adicionar Formação
       </button>
 
-      <SectionHeader title="Projetos" />
+
+
+      <SectionHeader title="PROJETOS ACADÊMICOS E TÉCNICOS" />
       {projectFields.map((field, index) => (
         <div
           key={field.id}
@@ -457,17 +459,7 @@ export const CVForm: React.FC<CVFormProps> = ({
         <Plus size={18} className="mr-1" /> Adicionar Projeto
       </button>
 
-      <SectionHeader title="PROJETOS ACADÊMICOS E TÉCNICOS" />
-      <div>
-        <label htmlFor="academicProjects" className="sr-only">Projetos Acadêmicos e Técnicos</label>
-        <textarea
-          id="academicProjects"
-          {...reg('academicProjects')}
-          rows={6}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"
-          placeholder="Descreva projetos acadêmicos e técnicos (organize por linhas ou parágrafos)..."
-        />
-      </div>
+      
 
       <SectionHeader title="COMPETÊNCIAS TÉCNICAS" />
       <div>

@@ -58,11 +58,6 @@ export const defaultCV: CVData = {
     'Análise de Sistemas\nPesquisa de Usuários\nMachine Learning\nMetodologia Ágil\nBanco de Dados',
   languages: 'Inglês: B1 (Intermediário avançado) - Leitura técnica fluente, participação em code reviews internacionais',
   softSkills: '',
-  academicProjects: `Projetos em Python | UTFPR
-    2022 - Presente
-    Desenvolvi diversos projetos acadêmicos utilizando Python, aplicando conceitos de programação orientada a objetos, estruturas de dados, algoritmos e desenvolvimento backend. Implementei sistemas de gerenciamento de dados com manipulação de arquivos, validações e lógica de negócio complexa. Trabalhei com bibliotecas Python para processamento de dados e automação de tarefas. Apliquei conceitos de POO (Programação Orientada a Objetos) criando classes, herança, polimorfismo e encapsulamento em projetos práticos. Desenvolvi APIs RESTful utilizando conceitos de arquitetura backend e integração com bancos de dados relacionais e NoSQL.
-    Conhecimento em Cloud Computing (AWS)
-    Conhecimento teórico em serviços AWS incluindo EC2 (Elastic Compute Cloud) para provisionamento de servidores virtuais, S3 (Simple Storage Service) para armazenamento de objetos, Lambda para computação serverless, RDS (Relational Database Service) para bancos de dados gerenciados, e conceitos de arquitetura cloud, escalabilidade, alta disponibilidade e segurança em ambientes distribuídos.`,
   interpersonalSkills: `Liderança e Mentoria: Conduzo revisões de código detalhadas e sessões de pair programming, reduzindo tempo de onboarding de novos desenvolvedores em 50%. Assumo naturalmente papel de referência técnica, propondo soluções para problemas complexos e educando a equipe sobre trade-offs técnicos.
   Comunicação e Colaboração: Facilito comunicação efetiva entre equipes técnicas e não-técnicas, traduzindo requisitos de negócio em soluções técnicas viáveis. Demonstro empatia ao entender perspectivas de designers, PMs e stakeholders, criando consenso através de apresentações claras e negociação construtiva.
   Resolução de Problemas: Aplico pensamento analítico sistemático para diagnosticar problemas complexos, como evidenciado pela resolução de bug crítico de race condition que salvou dados de clientes e pela otimização de performance que aumentou conversões em 25%.
